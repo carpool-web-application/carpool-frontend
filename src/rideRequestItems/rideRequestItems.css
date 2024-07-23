@@ -1,0 +1,89 @@
+.rider-details {
+  left: 300px;
+  position: relative;
+  margin-top: 10px;
+  all: initial;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 30px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  border-radius: 20px;
+  display: grid;
+  top: 5%;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(1, auto);
+  grid-gap: 20px;
+  background-color: #919191;
+  opacity: 0.8;
+  width: 50%;
+}
+
+
+
+
+
+.button-div {
+  display: flex;
+  justify-content: space-between; /* Aligns items at the beginning and end of the container */
+  align-items: center; /* Centers items vertically */
+  width: 100%;
+}
+
+.div-text {
+  display: block;
+  width: 60%;
+  margin: 10px;
+} 
+
+.rider-name {
+  margin: 10px;
+  font-size: 30px;
+  color: aliceblue;
+  width: 100%;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: bolder;
+}
+
+
+
+.grid-items {
+
+}
+
+
+.acceptbtn-driver {
+  all: initial;
+  margin: 10px;
+  position: relative;
+  height: 60px;
+  width: 130px;
+  font-size: 2rem;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.acceptbtn-driver:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.rejectbtn-driver {
+  all: initial;
+  margin: 10px;
+  position: relative;
+  height: 60px;
+  width: 130px;
+  font-size: 2rem;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.rejectbtn-driver:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: whitesmoke;
+  cursor: pointer;
+}/*# sourceMappingURL=rideRequestItems.css.map */

@@ -1,0 +1,452 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700);
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+.main-page{
+  height: 100%;
+  width: 100%;
+
+
+  
+}
+
+[class*=underlay] {
+    left: 0;
+    min-height: 100%;
+    min-width: 100%;
+    position: fixed;
+    top: 0;
+  }
+
+  .underlay-photo {
+    animation: hue-rotate 6s infinite;
+    background: url('../Images/SIGNUP.webp');
+    background-size: cover;
+    -webkit-filter: grayscale(30%);
+    z-index: -1;
+  }
+  .underlay-black {
+    background: rgba(0,0,0,0.7);
+    z-index: -1;
+  }
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    height: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+  background-color: #f6f4e6;
+  border-radius: 25%;
+    img {
+      width: 100%;
+    }
+  
+    h1 {
+      font-size: 24px;
+      color: grey;
+      
+    }
+  
+    .title {
+      color: rgb(241, 237, 237);
+      font-size: 28px;
+      background-color: transparent;
+      margin-top: 10px;
+      padding: 10px;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-style: italic;
+      font-weight: bold;
+    }
+  
+    button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+  
+    a {
+      text-decoration: none;
+      font-size: 22px;
+      color: black;
+  
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  
+    .social-links {
+      margin: 24px 0;
+  
+      a {
+        margin-right: 16px;
+  
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+
+body {
+  font-family: 'Open Sans';
+  font-weight: 100;
+  display: flex;
+  overflow: scroll;
+}
+
+div input {
+  ::-webkit-input-placeholder {
+     color: rgba(255,255,255,0.7);
+  }
+  ::-moz-placeholder {
+     color: rgba(255,255,255,0.7);  
+  }
+  :-ms-input-placeholder {  
+     color: rgba(255,255,255,0.7);  
+  }
+  &:focus {
+    outline: 0 transparent solid;
+    ::-webkit-input-placeholder {
+     color: rgba(0,0,0,0.7);
+    }
+    ::-moz-placeholder {
+       color: rgba(0,0,0,0.7);  
+    }
+    :-ms-input-placeholder {  
+       color: rgba(0,0,0,0.7);  
+    }
+  }
+}
+
+.login-form {
+  //background: #222;
+  //box-shadow: 0 0 1rem rgba(0,0,0,0.3);
+  min-height: 10rem;
+  margin: 100px;
+  left: -350px;
+  max-width: 50%;
+  padding: 100px;
+  position: absolute;
+
+}
+ .login-text {
+  //background: hsl(40,30,60);
+  //border-bottom: .5rem solid white;
+  color: white;
+  font-size: 1.5rem;
+  margin: 10px;
+  max-width: 50%;
+  left: 100px;
+  padding : 100;
+  text-align: center;
+  //text-shadow: 1px -1px 0 rgba(0,0,0,0.3);
+  .fa-stack-1x {
+    color: black;
+    position: relative;
+  }
+}
+::placeholder{
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: bold;
+}
+
+
+
+.login-username, .login-password {
+  background: transparent;
+  border: 0 solid;
+  border-bottom: 1px solid rgba(white, .5);
+  color: white;
+  display: block;
+  margin: 1rem;
+  padding: .5rem;
+  transition: 250ms background ease-in;
+  width: calc(100% - 3rem);
+  &:focus {
+    background: white;
+    color: black;
+    transition: 250ms background ease-in;
+  }
+}
+
+.login-forgot-pass {
+  //border-bottom: 1px solid white;
+  bottom: 0;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 75%;
+  left: 0;
+  opacity: 0.6;
+  padding: .5rem;
+  position: absolute;
+  text-align: center;
+  //text-decoration: none;
+  width: 100%;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+
+.login-submit {
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  display: block;
+  margin: 0px;
+ width: 300px;
+ padding-top: 100px;
+ left: 20px;
+  margin-left: 250px;
+
+  &:hover, &:focus {
+    cursor: pointer;
+    background: white;
+    color: black;
+    transition: 250ms background ease-in;
+  }
+}
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+
+  &.success {
+    background-color: #04AA6D;
+  }
+
+  &.info {
+    background-color: #2196F3;
+  }
+
+  &.warning {
+    background-color: #ff9800;
+  }
+}
+
+ //.navbar{
+
+  .navMenu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    position: fixed;
+      top: 100px;
+      left: 55%;
+      display: inline-block;
+      right: 2000%;
+      width: 1000px;
+      height:100px;
+  }
+  
+  .navMenu a {
+    color: #f6f4e6;
+    text-decoration: none;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-block;
+   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+   
+  }
+  
+  .navMenu a:hover {
+    color: #edb6a4;
+  }
+  
+  .navMenu .dot {
+    width: 6px;
+    height: 6px;
+    background: #9ebdf2;
+    border-radius: 50%;
+    opacity: 0;
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .navMenu a:nth-child(1):hover ~ .dot {
+    -webkit-transform: translateX(30px);
+    transform: translateX(30px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+  
+  .navMenu a:nth-child(2):hover ~ .dot {
+    -webkit-transform: translateX(110px);
+    transform: translateX(110px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+  
+  .navMenu a:nth-child(3):hover ~ .dot {
+    -webkit-transform: translateX(200px);
+    transform: translateX(200px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+  
+  .navMenu a:nth-child(4):hover ~ .dot {
+    -webkit-transform: translateX(285px);
+    transform: translateX(285px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+  .navMenu a:nth-child(5):hover ~ .dot {
+    -webkit-transform: translateX(285px);
+    transform: translateX(285px);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+
+
+/* width: 1000px;
+height:100px;
+font-size: 30px;
+align-items: center;
+padding: 10px;
+position: fixed;
+  top: 20px;
+  left: 30%;
+  right: 50%;
+  height: 100px;
+  font-size: 40px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color:whitesmoke; */ 
+
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    color: black;
+  }
+}
+
+
+
+[class*=underlay] {
+  left: 0;
+  min-height: 100%;
+  min-width: 100%;
+  position: fixed;
+  top: 0;
+}
+.underlay-photo {
+  animation: hue-rotate 6s infinite;
+  background: url('../Images/SIGNUP.webp');
+  background-size: cover;
+  -webkit-filter: grayscale(30%);
+  z-index: -1;
+}
+.underlay-black {
+  background: rgba(0,0,0,0.7);
+  z-index: -1;
+}
+
+@keyframes hue-rotate {
+  from {
+    -webkit-filter: grayscale(30%) hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: grayscale(30%) hue-rotate(360deg);
+  }
+}
+.googleMap{
+  margin: 10px 0 0;
+  align-items: center;
+  position: relative;
+top: -150px;
+left: 640px;
+height: 500px;
+}
+
+.disp-drivers {
+  position: relative; /* set position to relative so we can position the pop-up */
+  left: 300px;
+}
+.driverapp-carpool{
+  z-index: 3;
+  left:0px;
+  top:0px;
+
+  position: absolute;
+  height: 200px;
+  width: 250px;
+
+}
+
+.popup {
+  position: absolute;
+  top: 100%; /* position the pop-up below the parent element */
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  display: none; /* hide the pop-up by default */
+}
+
+.disp-drivers:hover .popup {
+  display: block; /* show the pop-up on hover */
+}
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 2rem;
+
+  &.success {
+    background-color: #04AA6D;
+  }
+
+  &.info {
+    background-color: #2196F3;
+  }
+
+  &.warning {
+    background-color: #ff9800;
+  }
+}

@@ -1,0 +1,15 @@
+.user{
+    
+    height: 100px;
+    width: 100px;
+    padding: 40%;
+    margin-top: 500px;
+    margin-bottom: 5px;
+}
+.userprofile{
+    text-decoration: solid;
+}
+
+/* .profile {
+    background-image: url("/images/background.png");
+  } */

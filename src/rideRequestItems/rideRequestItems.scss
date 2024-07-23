@@ -1,0 +1,56 @@
+.rider-details{
+    top:30px;
+    left:300px;
+    position: relative;
+    margin-top: 10px;
+}
+
+ .rider-name{
+    margin: 10px;
+    font-size: 30px;
+    color: aliceblue;
+    width: 600px;
+    // position: relative;
+    left: -190px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+}
+
+.acceptbtn{
+    all:initial;
+    margin: 10px;
+    top:90px;
+    left:-190px;
+    position: relative;
+    height: 60px;
+    width: 130px;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    text-decoration: underline;
+    
+}
+.acceptbtn:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: whitesmoke;
+    cursor: pointer;
+  }
+
+.rejectbtn{
+    all:initial;
+    margin: 10px;
+    top:90px;
+    right:70px;
+    position: relative;
+    height: 60px;
+    width: 130px;
+    font-size: 2rem;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    text-decoration: underline;
+}
+.rejectbtn:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: whitesmoke;
+    cursor: pointer;
+  }

@@ -1,0 +1,90 @@
+.rider-home-navMenu {
+  border-radius: 20px;
+  border-color: black;
+  background-color: #05386b;
+  position: fixed;
+  top: 50%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  /*  padding: 10px; */
+  top: 8%;
+  left: 50%;
+  display: inline-block;
+  width: 50%;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.rider-home-navMenu a {
+  color: #f6f4e6;
+  text-decoration: none;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  transition: all 0.2s ease-in-out;
+}
+
+.rider-home-navMenu a:hover {
+  color: #edb6a4;
+}
+
+.rider-home-navMenu .dot {
+  width: 6px;
+  height: 6px;
+  background: #9ebdf2;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.2s ease-in-out;
+}
+
+.rider-home-navMenu a:nth-child(1):hover ~ .dot {
+  transform: translateX(30px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.rider-home-navMenu a:nth-child(2):hover ~ .dot {
+  transform: translateX(110px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.rider-home-navMenu a:nth-child(3):hover ~ .dot {
+  transform: translateX(200px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.rider-home-navMenu a:nth-child(4):hover ~ .dot {
+  transform: translateX(285px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.rider-home-navMenu a:nth-child(5):hover ~ .dot {
+  transform: translateX(285px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+
+
+.rider-seacrh-gif-container {
+  position:absolute;
+  height: 150px;
+  width: 250px;
+  left: 0%;
+}
+
+.rider-carpool-gif {
+  z-index: 3;
+  position: absolute;
+  height: 150px;
+  width: 250px;
+}
