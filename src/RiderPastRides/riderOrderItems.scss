@@ -1,0 +1,121 @@
+body .rider-details {
+  all:initial;
+  display: grid;
+  grid-template-columns: 1fr 0fr;
+  grid-template-rows: repeat(1, auto);
+  grid-gap: 10px;
+  background-color: black;
+  position: relative;
+
+  
+}
+.card-pagination {
+  all:initial;
+  margin-left: -400px;
+}
+
+.card-pagination .pagination {
+  all:initial;
+  list-style: none;
+  margin-left: 700px;
+  display: flex;
+}
+
+.page-item {
+  all:initial;
+  padding: 10px;
+}
+
+.page-item:hover {
+  color: white;}
+
+.rider-name {
+  grid-column: 1 / span 2;
+}
+
+.acceptbtn {
+  grid-column: 1;
+  grid-row: 5;
+}
+
+.rejectbtn {
+  grid-column: 2;
+  grid-row: 5;
+}
+
+.rideRequestData {
+  grid-column: 1 / span 2;
+}
+
+
+  .navMenu a:hover {
+    color: #edb6a4;
+  }
+  
+  .navMenu .dot {
+    width: 6px;
+    height: 6px;
+    background: #9ebdf2;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .navMenu a:nth-child(1):hover ~ .dot {
+    transform: translateX(30px);
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+  
+  .navMenu a:nth-child(2):hover ~ .dot {
+    transform: translateX(110px);
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+  
+  .navMenu a:nth-child(3):hover ~ .dot {
+    transform: translateX(200px);
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+  
+  .navMenu a:nth-child(4):hover ~ .dot {
+    transform: translateX(285px);
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+  
+  .navMenu a:nth-child(5):hover ~ .dot {
+    transform: translateX(285px);
+    transition: all 0.2s ease-in-out;
+    opacity: 1;
+  }
+
+  // .acceptbtn{
+
+  //   border: 1px solid white;
+  // background: transparent;
+  // color: rgb(13, 11, 11);
+  // display: block;
+  // margin: 100px;
+  // margin-bottom: 100px;
+  
+  // // margin-right: 900px;
+  // min-width: 1px;
+  // text-align: center;
+  // height: 50px;
+  // width: 150px;
+  // align-items: center;
+  // font-size: 20px;
+  // position: absolute;
+  // left: -360px;
+  
+  
+  // &:hover, &:focus {
+  // background: white;
+  // color: black;
+  
+  // box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  // }
+  // }

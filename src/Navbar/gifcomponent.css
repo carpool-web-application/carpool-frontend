@@ -1,0 +1,15 @@
+.driver-seacrh-gif-container {
+  position:absolute;
+  height: 150px;
+  width: 250px;
+  left: 0%;
+  position: fixed;
+  z-index: 3;
+}
+
+.driver-carpool-gif {
+  z-index: 3;
+  position: absolute;
+  height: 150px;
+  width: 250px;
+}

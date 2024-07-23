@@ -1,0 +1,94 @@
+.rider-past-details {
+  background-color: black;
+  position: relative;
+  width: 30%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.card-pagination {
+  all: initial;
+  margin-left: -400px;
+}
+
+.card-pagination .pagination {
+  all: initial;
+  list-style: none;
+  margin-left: 700px;
+  display: flex;
+}
+
+.page-item {
+  all: initial;
+  padding: 10px;
+}
+
+.page-item:hover {
+  color: white;
+}
+
+.rider-order-name {
+  color: white;
+}
+
+.acceptbtn {
+  grid-column: 1;
+  grid-row: 5;
+}
+
+.rejectbtn {
+  grid-column: 2;
+  grid-row: 5;
+}
+
+.rideRequestData {
+  grid-column: 1/span 2;
+}
+
+.navMenu a:hover {
+  color: #edb6a4;
+}
+
+.navMenu .dot {
+  width: 6px;
+  height: 6px;
+  background: #9ebdf2;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:nth-child(1):hover ~ .dot {
+  transform: translateX(30px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(2):hover ~ .dot {
+  transform: translateX(110px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(3):hover ~ .dot {
+  transform: translateX(200px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(4):hover ~ .dot {
+  transform: translateX(285px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}
+
+.navMenu a:nth-child(5):hover ~ .dot {
+  transform: translateX(285px);
+  transition: all 0.2s ease-in-out;
+  opacity: 1;
+}/*# sourceMappingURL=riderOrderItems.css.map */
