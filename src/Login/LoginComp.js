@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm.js";
@@ -20,10 +21,12 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+
   /*   useEffect(() => {
       // Dispatch the setupConnection action to establish the socket connection
       dispatch(setupConnection());
   }, []); */
+
 
   const handleUsernameChange = (data) => {
     setUsername(data);
@@ -59,12 +62,14 @@ const Login = () => {
     const emailPattern = /\S+@\S+\.\S+/;
     if (!emailPattern.test(email)) {
       alert("Please enter a valid email address.");
+
       return;
     }
 
     // Submit the form
 
     //console.log(username)
+
     const existingRecordResponse = await fetch(
       `http://localhost:9000/userAuths/${username}`
     );
@@ -74,11 +79,9 @@ const Login = () => {
     if (!username || !password) {
       alert("All fields are required.");
       return;
-    } /* 
-    if (commuterStatus !== "Rider" && commuterStatus !== "Driver") {
-      alert("Invalid commuter status selected.");
-      return;
-    } */
+
+    } 
+
     // existingRecordData.forEach(record =>{
     if (existingRecordData) {
       if (
@@ -211,5 +214,6 @@ const Login = () => {
     </div>
   );
 };
+
 
 export default Login;
