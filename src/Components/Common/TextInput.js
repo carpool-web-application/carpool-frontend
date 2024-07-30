@@ -9,7 +9,6 @@ function TextInput({
   placeholder,
   children,
 }) {
-  console.log(children);
   const updateUsername = (e) => {
     onchange(e.target.value);
   };
