@@ -13,17 +13,10 @@ import RiderNavBar from "../Navbar/navBarComponent-rider.js";
 import GifComponent from "../Navbar/gifcomponent.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-const containerStyle = {
-  width: "100%",
-  height: "100%",
-  borderRadius: "10px",
-};
-//define a center point for Maps to load
-const center = {
-  lat: 37.7749,
-  lng: -122.4194,
-};
+import SearchDriverButton from "../Components/Common/SearchDriverButton.js";
+import Alert from "../Components/Common/alert.js";
+import MapComponent from "../Components/Common/MapComponent.js";
+import ModalComponent from "../Components/Common/modalcomponent.js";
 
 const libraries = ["places"];
 const RiderFinder = () => {
@@ -178,8 +171,7 @@ const RiderFinder = () => {
       });
   };
 
-  const searchForRide = async (event) => {
-    event.preventDefault();
+  const searchForRide = async () => {
     const origincord = await handleGeocodeLocation(originRef.current.value);
 
     const destinationcord = await handleGeocodeLocation(
@@ -211,19 +203,9 @@ const RiderFinder = () => {
   //console.log(showPayment == true)
   return (
     <div className="main-page">
-      {/*         <div className='navMenu' >
-          <a href='/riderHome'>Rider Home</a> &nbsp; &nbsp;
-          <a href='/riderLogin'>Find a Ride</a> &nbsp; &nbsp;
-          <a href='/riderpastRides'>Past Rides</a> &nbsp; &nbsp;
-          <a href='/homePage'>Logout</a>
-        </div>
-
-        <div className='seacrh-gif-container'>
-        <img className="search-carpool" src="https://www.jojobrt.com/wp-content/uploads/2022/02/attuare_progetto_carpooling_PSCL.gif"/>
-        </div> */}
       <div className="rider-search-navbar-container">
         <RiderNavBar />
-        <GifComponent />
+        {/* <GifComponent /> */}
       </div>
 
       <div className="seacrh-container">
@@ -279,77 +261,15 @@ const RiderFinder = () => {
               className="login-username"
             />
 
-            {showButton == true ? (
-              <div className="search-button-container">
-                <button
-                  type="submit"
-                  className="search-login-submit"
-                  onClick={searchForRide}
-                >
-                  GET ME A RIDE!
-                </button>
-              </div>
-            ) : (
-              <div className="message-request">
-                <div className="alert">
-                  <span className="closebtn">&times;</span>
-                  <strong>
-                    Oops! Looks like you have already requested a ride. Kindly
-                    wait..
-                  </strong>
-                </div>
-              </div>
-            )}
+            {showButton == true ? <SearchDriverButton /> : <Alert />}
           </form>
         </div>
         <div className="map-container">
-          <div className="rider-googleMap">
-            <GoogleMap
-              mapContainerStyle={containerStyle}
-              center={center}
-              zoom={13}
-            >
-              {directions && <DirectionsRenderer directions={directions} />}
-            </GoogleMap>
-          </div>
-          {/* <div> */}
+          <MapComponent directions={directions} />
           {diplayDrivers === true ? (
-            /*             <div>
-              <GetClosestDriver
-              startLat={origin.latProp}
-              startLon={origin.lngProp}
-              endLat={destination.latProp}
-              endLon={destination.lngProp}
-              seats = {seats}
-              origin = {originRef.current.value}
-              destination = {destinationRef.current.value}
-              riderID = {parsedData?.userName}
-              
-            />
-            </div> */
-            <div>
-              {isOpen && (
-                <div className="modal">
-                  <div className="modal-content">
-                    <span className="close" onClick={toggleModal}>
-                      X
-                    </span>
-                    <GetClosestDriver
-                      startLat={origin.latProp}
-                      startLon={origin.lngProp}
-                      endLat={destination.latProp}
-                      endLon={destination.lngProp}
-                      seats={seats}
-                      origin={originRef.current.value}
-                      destination={destinationRef.current.value}
-                      riderID={parsedData?.userName}
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
+            <div>{isOpen && <ModalComponent toggleModal={toggleModal} />}</div>
           ) : null}
-          {showPayment == true ? (
+          {showPayment === true ? (
             <div className="payment-rider">
               <PaymentComp
                 cost={calculateCost}
@@ -362,47 +282,6 @@ const RiderFinder = () => {
           )}
         </div>
       </div>
-
-      {/* </div> */}
-
-      {/*         <div className='googleMap'>
-      <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={13}
-          >
-            {directions && <DirectionsRenderer directions={directions} />}
-          </GoogleMap>
-          </div>
-          <div>
-            {(diplayDrivers === true) ? (<div>
-              <GetClosestDriver
-              startLat={origin.latProp}
-              startLon={origin.lngProp}
-              endLat={destination.latProp}
-              endLon={destination.lngProp}
-              seats = {seats}
-              origin = {originRef.current.value}
-              destination = {destinationRef.current.value}
-              riderID = {parsedData?.userName}
-              
-            />
-            </div>) : null
-          
-          }
-          {(showPayment == true) ? (
-                      <div className="payment">
-                      <PaymentComp  
-                      cost = {calculateCost}
-                       riderEmail="rutuja.patil17@vit.edu"
-                       riderUserName="riderRutuja" 
-                       />
-                      </div>
-
-        ) : (
-      <p></p>
-        )}
-      </div> */}
     </div>
   );
 };
