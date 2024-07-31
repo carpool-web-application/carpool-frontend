@@ -109,17 +109,8 @@ const Rider = () => {
 
   return (
     <div className="rider-home-main-page">
-      {/*         <div className='rider-home-navMenu' >
-          <a href='/riderHome'>Rider Home</a> &nbsp; &nbsp;
-          <a href='/riderLogin'>Find a Ride</a> &nbsp; &nbsp;
-          <a href='/riderpastRides'>Past Rides</a> &nbsp; &nbsp;
-          <a href='/homePage'>Logout</a>
-        </div>
-        <div className='rider-home-gif-container'>
-          <img className="rider-home-gif-carpool" src="https://www.jojobrt.com/wp-content/uploads/2022/02/attuare_progetto_carpooling_PSCL.gif"/>
-        </div> */}
       <RiderNavBar />
-      <GifComponent />
+      {/* <GifComponent /> */}
       <div className="rider-profle-container">
         <div className="rider-card">
           <div className="rider-profile-image-container">
