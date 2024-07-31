@@ -149,26 +149,7 @@ const DriverSearch = ({ showButton, setDirectionCall, openModal }) => {
         className="login-username"
       />
 
-      {showButton == true ? (
-        <div className="search-button-container">
-          <button
-            type="submit"
-            className="search-login-submit"
-            onClick={searchForRide}
-          >
-            GET ME A RIDE!
-          </button>
-        </div>
-      ) : (
-        <div className="message-request">
-          <div className="alert">
-            <span className="closebtn">&times;</span>
-            <strong>
-              Oops! Looks like you have already requested a ride. Kindly wait..
-            </strong>
-          </div>
-        </div>
-      )}
+      {showButton == true ? <SearchDriverButton /> : <Alert />}
     </form>
   );
 };

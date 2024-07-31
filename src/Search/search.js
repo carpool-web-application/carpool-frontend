@@ -61,27 +61,11 @@ const RiderFinder = () => {
           (record) =>
             record.CommuteStatus == "Approved" && record.PaymentFlag == "N"
         );
-        //console.log(recordPayment)
-        /* if (recordRequested.length>0) {
-          <div className="alert">
-          <span className="closebtn">&times;</span>  
-          <strong>Hello, You have already requested</strong>
-        </div> 
-          return;
-          }
-        else  */ if (recordPayment.length > 0) {
+        if (recordPayment.length > 0) {
           setshowPayment(true);
           return;
         }
       } else if (
-        /*       else if (existingRecordData.CommuteStatus == 'Requested' ) {
-        alert('You have already requested');
-        <div className="alert">
-        <span className="closebtn">&times;</span>  
-        <strong>Hello, You have already requested</strong>
-      </div> 
-        return;
-      }   */
         existingRecordData.CommuteStatus == "Approved" &&
         existingRecordData.PaymentFlag === "N"
       ) {
@@ -93,10 +77,7 @@ const RiderFinder = () => {
     fetchData();
   }, [showButton, showPayment, parsedData?.userName]);
 
-  console.log(showButton);
-  /** @type React.MutableRefObject<HTMLInputElement>*/
   const originRef = useRef();
-  /** @type React.MutableRefObject<HTMLInputElement>*/
   const destinationRef = useRef();
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API,
@@ -111,14 +92,6 @@ const RiderFinder = () => {
       </div>
     );
   }
-
-  /*   const onOriginChange = (event) => {
-    setOrigin(origin,[event.target.name] = event.target.value);
-  }
-
-  const onDestinationChange = (event) => {
-    //setDestination(event.target.value);
-  } */
 
   const onPickUpTimeChange = (event) => {
     setPickUpTime(event.target.value);
@@ -261,14 +234,34 @@ const RiderFinder = () => {
               className="login-username"
             />
 
-            {showButton == true ? <SearchDriverButton /> : <Alert />}
+            {showButton === true ? (
+              <SearchDriverButton searchForRide={searchForRide} />
+            ) : (
+              <Alert />
+            )}
           </form>
         </div>
+        <div className="driver-modal">
+          {isOpen && (
+            <ModalComponent toggleModal={toggleModal}>
+              <GetClosestDriver
+                startLat={origin.latProp}
+                startLon={origin.lngProp}
+                endLat={destination.latProp}
+                endLon={destination.lngProp}
+                seats={seats}
+                origin={originRef.current.value}
+                destination={destinationRef.current.value}
+                riderID={parsedData?.userName}
+              />{" "}
+            </ModalComponent>
+          )}
+        </div>
+        {/*         {diplayDrivers === true ? (
+          <div>{isOpen && <ModalComponent toggleModal={toggleModal} />}</div>
+        ) : null} */}
         <div className="map-container">
           <MapComponent directions={directions} />
-          {diplayDrivers === true ? (
-            <div>{isOpen && <ModalComponent toggleModal={toggleModal} />}</div>
-          ) : null}
           {showPayment === true ? (
             <div className="payment-rider">
               <PaymentComp
