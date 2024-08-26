@@ -1,8 +1,7 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginForm from "./LoginForm.js";
-import "./Login.css";
+import LoginForm from "./Component/LoginForm.js";
+import styles from "./Login.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { storeDriver } from "../Slice/driverSlice";
 import { storeRider } from "../Slice/riderSlice.js";
@@ -21,12 +20,10 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   /*   useEffect(() => {
       // Dispatch the setupConnection action to establish the socket connection
       dispatch(setupConnection());
   }, []); */
-
 
   const handleUsernameChange = (data) => {
     setUsername(data);
@@ -79,8 +76,7 @@ const Login = () => {
     if (!username || !password) {
       alert("All fields are required.");
       return;
-
-    } 
+    }
 
     // existingRecordData.forEach(record =>{
     if (existingRecordData) {
@@ -122,15 +118,12 @@ const Login = () => {
   };
 
   return (
-    <div className="login-parent-container">
-      <div className="login-gif-container">
-        <img
-          className="login-carpool"
-          src="https://www.jojobrt.com/wp-content/uploads/2022/02/attuare_progetto_carpooling_PSCL.gif"
-        />
-      </div>
-      <div className="login-container">
-        <LoginForm className="loginpage-login-form">
+    <div className={styles.loginparentcontainer}>
+      <nav className={styles.navBar}>
+        <span>Carpool!!!</span>
+      </nav>
+      <div className={styles.formContainer}>
+        <LoginForm className={styles.loginForm}>
           {/*           <input
             type="email"
             value={email}
@@ -140,12 +133,13 @@ const Login = () => {
             required={true}
             placeholder="Email"
           /> */}
+          <span>Login to enjoy offers while riding</span>
           <TextInput
             key="email"
             type="email"
             value={email}
             onchange={handleEmailChange}
-            className="login-username"
+            className={styles.userName}
             autoFocus={true}
             required={true}
             placeholder="Email"
@@ -164,7 +158,7 @@ const Login = () => {
             type="text"
             value={username}
             onchange={handleUsernameChange}
-            className="login-username"
+            className={styles.userName}
             autoFocus={true}
             required={true}
             placeholder="Username"
@@ -174,7 +168,7 @@ const Login = () => {
             type="password"
             value={password}
             onchange={handlePasswordChange}
-            className="login-password"
+            className={styles.userName}
             required={true}
             placeholder="Password"
           />
@@ -186,11 +180,10 @@ const Login = () => {
             onChange={handlePasswordChange}
             placeholder="Password"
           /> */}
-          <div className="createprofile-container">
-            <p className="login-sign-up">
-              Don't have an account?
-              <a href="/createProfile">Sign up now</a>
-            </p>
+
+          <div>
+            <span>Don't have an account?</span>
+            <a href="/createProfile">Sign up now</a>
           </div>
           {/*           <button
             type="button"
@@ -202,18 +195,21 @@ const Login = () => {
             {" "}
             LOG IN{" "}
           </button> */}
-          <SubmitButton submitform={handleSubmit}></SubmitButton>
+          <SubmitButton
+            submitform={handleSubmit}
+            className={styles.submitButton}
+          ></SubmitButton>
         </LoginForm>
-        {/* 
+      </div>
+
+      {/* 
 
           <a href="#" className="loginn-forgot-pass">forgot password?</a> */}
 
-        {/* <div className="login-underlay-photo"></div> */}
-        {/* <div className="login-underlay-black"></div> */}
-      </div>
+      {/* <div className="login-underlay-photo"></div> */}
+      {/* <div className="login-underlay-black"></div> */}
     </div>
   );
 };
-
 
 export default Login;

@@ -13,7 +13,7 @@ function TextInput({
     onchange(e.target.value);
   };
   return (
-    <div className="Input-text">
+    <>
       <input
         type={type}
         onChange={updateUsername}
@@ -24,7 +24,7 @@ function TextInput({
       >
         {children}
       </input>
-    </div>
+    </>
   );
 }
 
