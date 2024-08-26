@@ -50,16 +50,8 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
-    if (!email || !username || !password) {
+    if (!username || !password) {
       alert("Please fill out all fields.");
-      return;
-    }
-
-    // Check if the email address is valid
-    const emailPattern = /\S+@\S+\.\S+/;
-    if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address.");
-
       return;
     }
 
@@ -134,7 +126,7 @@ const Login = () => {
             placeholder="Email"
           /> */}
           <span>Login to enjoy offers while riding</span>
-          <TextInput
+          {/*           <TextInput
             key="email"
             type="email"
             value={email}
@@ -143,7 +135,7 @@ const Login = () => {
             autoFocus={true}
             required={true}
             placeholder="Email"
-          />
+          /> */}
           {/*           <input
             type="text"
             value={username}
