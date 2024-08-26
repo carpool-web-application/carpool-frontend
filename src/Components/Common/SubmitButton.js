@@ -1,24 +1,21 @@
 import "./TextInput.module.css";
 
-function SubmitButton({ submitform }) {
+function SubmitButton({ submitform, className }) {
   const submitForm = (e) => {
     e.preventDefault();
     submitform();
   };
   return (
-    <div className="form-button">
-      <button
-        type="button"
-        onClick={submitForm}
-        name="Login"
-        value="LOG IN"
-        className="login-login-submit"
-      >
-        {" "}
-        LOG IN{" "}
-      </button>
-      ;
-    </div>
+    <button
+      type="button"
+      onClick={submitForm}
+      name="Login"
+      value="LOG IN"
+      className={className}
+    >
+      {" "}
+      LOG IN{" "}
+    </button>
   );
 }
 
