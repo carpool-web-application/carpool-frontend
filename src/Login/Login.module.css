@@ -36,7 +36,28 @@
   height: 30px;
   border-radius: 10px;
   color: white;
-  background-color: #282828;
+  background-color: #1e1e1e;
+  box-shadow: 5px 5px 10px #4d4d4d;
+}
+
+.submitButton:hover {
+  box-shadow: 3px 3px 8px #4d4d4d; /* Subtle change on hover */
+}
+
+.submitButton[disabled] {
+  background-color: #aaa; /* Example of changing background to indicate disabled */
+  cursor: not-allowed; /* Default cursor for disabled */
+}
+
+.submitButton:active {
+  background-color: #1e1e1e; /* Slightly darker on click */
+  box-shadow: 2px 2px 5px #4d4d4d; /* Pressed effect */
+  transform: translateY(2px); /* Button appears pressed down */
+}
+
+.submitButton[disabled]:active {
+  background-color: #aaa; /* Example of changing background to indicate disabled */
+  cursor: not-allowed; /* Default cursor for disabled */
 }
 
 .userName {
@@ -46,6 +67,7 @@
   background-color: #eeeeee;
   border-color: white;
   border: 1px solid #ccc;
+  box-shadow: 5px 5px 10px #4d4d4d;
 }
 
 .userName:focus {

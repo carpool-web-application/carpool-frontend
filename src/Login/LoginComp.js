@@ -12,6 +12,7 @@ import SubmitButton from "../Components/Common/SubmitButton.js";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [disable, setDisable] = useState(true);
   const [email, setEmail] = useState("");
   const [commuterStatus, setCommuterStatus] = useState("");
   const [error, setError] = useState("");
@@ -19,6 +20,10 @@ const Login = () => {
   const [driverLoginButton, setDriverLoginButton] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setDisable(!username || !password);
+  }, [username, password]);
 
   /*   useEffect(() => {
       // Dispatch the setupConnection action to establish the socket connection
@@ -58,7 +63,7 @@ const Login = () => {
     // Submit the form
 
     //console.log(username)
-
+    setDisable((prev) => (prev = true));
     const existingRecordResponse = await fetch(
       `http://localhost:9000/userAuths/${username}`
     );
@@ -190,6 +195,7 @@ const Login = () => {
           <SubmitButton
             submitform={handleSubmit}
             className={styles.submitButton}
+            disabled={disable}
           ></SubmitButton>
         </LoginForm>
       </div>
