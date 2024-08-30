@@ -20,7 +20,7 @@ const Rider = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
 
-  const showProfileInformation = useCallback(async () => {
+  const showProfileInformation = async () => {
     try {
       const response = await fetch(`http://localhost:9000/riders/${driverId}`);
       if (response.ok) {
@@ -59,11 +59,11 @@ const Rider = () => {
     } catch (error) {
       setError("Failed to fetch profile data");
     }
-  });
+  };
 
   useEffect(() => {
     showProfileInformation();
-  }, [showProfileInformation]);
+  }, []);
 
   const handleImageUpload = async (data) => {
     const imageRef = ref(
