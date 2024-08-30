@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import RiderPastOrders from "./riderOrderitems.js";
 import "./riderPastRides.css";
-import RiderNavBar from "../Navbar/navBarComponent-rider.js";
+import RiderNavBar from "../Navbar/rider/navBarComponent-rider.js";
 import GifComponent from "../Navbar/gifcomponent.js";
 
 const RiderPastRides = () => {

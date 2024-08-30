@@ -9,7 +9,7 @@ import PaymentComp from "../Payment/payment";
 import GetClosestDriver from "./GetClosestDriver";
 import emailjs from "emailjs-com";
 import "./Search.css";
-import RiderNavBar from "../Navbar/navBarComponent-rider.js";
+import RiderNavBar from "../Navbar/rider/navBarComponent-rider.js";
 import GifComponent from "../Navbar/gifcomponent.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";

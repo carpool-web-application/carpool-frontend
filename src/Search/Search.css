@@ -359,7 +359,7 @@ div input:focus :-ms-input-placeholder {
 
 .underlay-photo {
   animation: hue-rotate 6s infinite;
-  background: url("../Images/SIGNUP.webp");
+  background: url("../Assets/SIGNUP.webp");
   background-size: cover;
   -webkit-filter: grayscale(30%);
   z-index: -1;

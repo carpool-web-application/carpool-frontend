@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import "./RiderHome.css";
-import * as firebase from "../Config/firebase-config.js";
+import * as firebase from "../../Config/firebase-config.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import RiderNavBar from "../Navbar/navBarComponent-rider.js";
-import GifComponent from "../Navbar/gifcomponent.js";
+import RiderNavBar from "../../Navbar/rider/navBarComponent-rider.js";
+import ProfilePicture from "./Component/ProfilePicture.js";
 import { useSelector } from "react-redux";
+import ProfileDetails from "../Rider/Component/ProfileDetails.js";
 
 const libraries = ["places"];
 const Rider = () => {
@@ -19,26 +20,12 @@ const Rider = () => {
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
 
-  useEffect(() => {
-    showProfileInformation();
-  }, []);
-
-  const showProfileInformation = async () => {
+  const showProfileInformation = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:9000/riders/${driverId}`);
       if (response.ok) {
         const data = await response.json();
         setProfileData(data);
-        /*         const userImage =  await ref(firebase.storage,`${driverData._id}/${driverData._id}_profile_image`);
-        const url = await getDownloadURL(userImage);
-        console.log(url);
-        if(url) {
-          setImageUrl(url);
-        }
-        else {
-          
-        } */
-
         try {
           const userImageRef = await ref(
             firebase.storage,
@@ -48,12 +35,10 @@ const Rider = () => {
           setImageUrl(url);
         } catch (error) {
           if (error.code === "storage/object-not-found") {
-            //console.error('Profile image not found:', error.message);
             setImageUrl(
               "https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
             );
           } else {
-            //console.error('Error fetching profile image:', error);
             setImageUrl(
               "https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
             );
@@ -74,20 +59,22 @@ const Rider = () => {
     } catch (error) {
       setError("Failed to fetch profile data");
     }
-  };
+  });
 
-  const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
+  useEffect(() => {
+    showProfileInformation();
+  }, [showProfileInformation]);
+
+  const handleImageUpload = async (data) => {
     const imageRef = ref(
       firebase.storage,
       `${driverData._id}/${driverData._id}_profile_image`
     );
-    uploadBytes(imageRef, file)
+    uploadBytes(imageRef, data)
       .then((image) => {
         getDownloadURL(image.ref)
           .then((downloadURL) => {
             setImageUrl(downloadURL);
-            console.log(downloadURL);
           })
           .catch((error) => {
             console.error("Error getting download URL:", error);
@@ -113,39 +100,14 @@ const Rider = () => {
       {/* <GifComponent /> */}
       <div className="rider-profle-container">
         <div className="rider-card">
-          <div className="rider-profile-image-container">
-            <div className="rider-profile-image">
-              <img src={imageUrl} alt="John" />
-            </div>
-
-            <div className="rider-profile-container">
-              <input
-                type="file"
-                id="fileInput"
-                onChange={handleImageUpload}
-                style={{ display: "none" }}
-              />
-              <button className="rider-profile-button" onClick={handleClick}>
-                Upload Image
-              </button>
-            </div>
-          </div>
+          <ProfilePicture
+            imageUrl={imageUrl}
+            handleClick={handleClick}
+            handleImageUpload={handleImageUpload}
+          />
 
           <div className="rider-profile-details">
-            <p className="title">
-              Rider: &nbsp;
-              {profileData.RiderName}
-              <p className="title">
-                {" "}
-                Email: &nbsp;
-                {profileData.RiderEmail}
-              </p>
-              <p className="title">
-                {" "}
-                Ratings: &nbsp;
-                {profileData.ratings}
-              </p>
-            </p>
+            <ProfileDetails profileData={profileData} />
           </div>
         </div>
       </div>
