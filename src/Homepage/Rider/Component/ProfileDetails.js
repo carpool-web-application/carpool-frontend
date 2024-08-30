@@ -13,7 +13,11 @@ const ProfileDetails = ({ profileData }) => {
       <span>Email: &nbsp;</span>
       <input required="true" value={profileData.RiderEmail}></input>
       <span>Ratings: &nbsp;</span>
-      <input required="true" value={profileData.ratings}></input>
+      <input
+        required="true"
+        value={profileData.ratings}
+        disabled={true}
+      ></input>
     </>
   );
 };
