@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeRider } from "../Slice/riderSlice";
+import { removeRider } from "../../Slice/riderSlice";
 import { Link } from "react-router-dom";
 import styles from "./navBarComponent-rider.module.css";
 
