@@ -4,9 +4,13 @@ import { useSelector } from "react-redux";
 import RiderPastOrders from "./riderOrderitems.js";
 import "./riderPastRides.css";
 import RiderNavBar from "../Navbar/rider/navBarComponent-rider.js";
-import GifComponent from "../Navbar/gifcomponent.js";
+import styled from "styled-components";
 
-const RiderPastRides = () => {
+const Main = styled.main`
+  height: 95%;
+  width: 100%;
+`;
+const RiderMyTrips = () => {
   /* const storedData = localStorage.getItem('rider'); */
   const driverData = useSelector((state) => state.rider.rider);
   const driverId = driverData?.userName;
@@ -51,13 +55,13 @@ const RiderPastRides = () => {
         if (Array.isArray(orderdata)) {
           const filteredDriverOrder = orderdata.filter(
             (item) =>
-              item.DriverPostStatus !== "Cancelled" && item.RiderId == driverId // Change column5 to the desired column for filtering
+              item.DriverPostStatus !== "Cancelled" && item.RiderId === driverId // Change column5 to the desired column for filtering
           );
           //console.log(filteredDriverOrder)
           setRiderOrders(filteredDriverOrder);
         } else if (
           orderdata.DriverPostStatus !== "Cancelled" &&
-          orderdata.RiderId == driverId
+          orderdata.RiderId === driverId
         ) {
           setRiderOrders(orderdata);
         } else {
@@ -120,14 +124,15 @@ const RiderPastRides = () => {
       />
     ));
   return (
-    <div className="rider-past-rides-container">
-      <div className="rider-past-rider-navbar-container">
-        <GifComponent />
-      </div>
-
-      <div className="grid-conatiner-view-riders">{DriverOrderData}</div>
-    </div>
+    <>
+      <RiderNavBar />
+      <Main>
+        <div className="rider-past-rides-container">
+          <div className="grid-conatiner-view-riders">{DriverOrderData}</div>
+        </div>
+      </Main>
+    </>
   );
 };
 
-export default RiderPastRides;
+export default RiderMyTrips;

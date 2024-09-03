@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import StripeCheckout from 'react-stripe-checkout';
-import emailjs from 'emailjs-com';
-import Confetti from 'react-confetti';
-import '../Search/Search.css';
+import React, { useState } from "react";
+import StripeCheckout from "react-stripe-checkout";
+import emailjs from "emailjs-com";
+import Confetti from "react-confetti";
+import styles from "../Search/Search.module.css";
 
-const Payment = ({ riderUserName, riderEmail , cost}) => {
+const Payment = ({ riderUserName, riderEmail, cost }) => {
   const [paymentComplete, setPaymentComplete] = useState(false);
 
   const handleToken = async (token) => {
-    const response = await fetch('http://localhost:9000/payment/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("http://localhost:9000/payment/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         token: token.id,
         cost: 1000, // in cents
@@ -21,27 +21,27 @@ const Payment = ({ riderUserName, riderEmail , cost}) => {
     console.log(data);
     if (data.success) {
       setPaymentComplete(true);
-     
     } else {
       setPaymentComplete(true);
       sendConfirmationEmail();
       //change later
       //setPaymentComplete(true);
-      alert('Payment Failed!');
+      alert("Payment Failed!");
     }
   };
 
   const sendConfirmationEmail = () => {
-    const templateID = 'template_a34i9to';
-    const serviceID = 'service_ei1jycj';
-    const userID = 'O25MTvtRdtBmJjw3S77ib';
+    const templateID = "template_a34i9to";
+    const serviceID = "service_ei1jycj";
+    const userID = "O25MTvtRdtBmJjw3S77ib";
 
-    emailjs.send(serviceID, templateID, userID)
+    emailjs
+      .send(serviceID, templateID, userID)
       .then((response) => {
-        console.log('Email sent:', response.text);
+        console.log("Email sent:", response.text);
       })
       .catch((error) => {
-        console.error('Email error:', error);
+        console.error("Email error:", error);
       });
   };
 
@@ -56,14 +56,18 @@ const Payment = ({ riderUserName, riderEmail , cost}) => {
           description="Ride payment"
         />
       ) : (
-
         <div className="success-message" onClick={sendConfirmationEmail}>
           <alert>Payment Successful!</alert>
         </div>
       )}
-      {
-         
-      paymentComplete && <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={500} recycle={false} />}
+      {paymentComplete && (
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          numberOfPieces={500}
+          recycle={false}
+        />
+      )}
     </div>
   );
 };

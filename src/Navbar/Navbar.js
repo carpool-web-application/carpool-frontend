@@ -12,7 +12,7 @@ import RiderHome from "../Homepage/Rider/RiderHome.js";
 import Payment from "../Payment/payment";
 import DriverApproval from "../DriverApproval/driverApproval.js";
 import DriverPastRides from "../DriverPastRides/driverPastRides.js";
-import RiderPastRides from "../RiderPastRides/riderPastRides.js";
+import RiderPastRides from "../MyTrips/riderPastRides.js";
 import { io } from "socket.io-client";
 export const socket = io("http://localhost:9000");
 const Navbar = () => {

@@ -7,6 +7,18 @@
   width: 100%;
 }
 
+.main {
+  height: 95%;
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
 .search-button-container {
   width: 100%;
   height: 55px;
@@ -67,41 +79,37 @@
   display: block;
 }
 
-.seacrh-container {
-  border-radius: 20px;
+.SearchSection {
   border: 2px solid black;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-
-  /*   justify-content: center;
-  align-items: center; */
-  background-color: #05386b;
   display: flex;
   flex: 1;
   flex-direction: row;
   gap: 10px;
-  margin: 1%;
+  height: 100%;
 }
 
-.seacrh-container:focus,
-.seacrh-container:active {
+.SearchSection:focus,
+.SearchSection:active {
   outline: none; /* Remove outline when focused or clicked */
 }
 
-.search-container-form {
+.searchcontainerform {
   width: 30%;
   height: 100%;
   position: relative;
   display: flex;
 }
 
-.map-container {
+.mapcontainer {
   width: 100%;
   height: 100%;
   display: flex;
-  position: relative;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
-.driver-modal {
+.drivermodal {
   display: flex;
 }
 
@@ -120,7 +128,7 @@
   width: 250px;
 }
 
-div .payment-rider {
+div .paymentrider {
   color: rgb(238, 238, 246);
   text-decoration: underline;
   transition: top 0.5s ease;
@@ -214,9 +222,15 @@ div input:focus :-ms-input-placeholder {
   color: rgba(0, 0, 0, 0.7);
 }
 
-.search-login-form {
-  position: absolute;
-  width: 100%;
+.searchloginform {
+  width: 90%;
+  height: 350px;
+  border: 1px solid #4d4d4d;
+  box-sizing: border-box;
+  margin: 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .modal {
@@ -226,14 +240,13 @@ div input:focus :-ms-input-placeholder {
   left: 0; /* 
   width: 100%;
   height: 100%; */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .modal-content {
-  background-color: white;
   position: relative;
   padding: 20px;
   border-radius: 8px;
@@ -281,20 +294,21 @@ div input:focus :-ms-input-placeholder {
   font-weight: bold;
 }
 
-.login-username,
-.login-password {
+.loginusername,
+.loginpassword {
   background: transparent;
   border: 0 solid;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-  color: white;
+  color: black;
   display: block;
   margin: 1rem;
   padding: 0.5rem;
   transition: 250ms background ease-in;
   width: calc(100% - 3rem);
+  border-color: black;
 }
-.login-username:focus,
-.login-password:focus {
+.loginusername:focus,
+.loginpassword:focus {
   background: white;
   color: black;
   transition: 250ms background ease-in;
