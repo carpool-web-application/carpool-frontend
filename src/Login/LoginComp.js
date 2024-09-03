@@ -7,7 +7,13 @@ import { storeDriver } from "../Slice/driverSlice";
 import { storeRider } from "../Slice/riderSlice.js";
 import TextInput from "../Components/Common/TextInput.js";
 import SubmitButton from "../Components/Common/SubmitButton.js";
+import styled from "styled-components";
 /* import { setupConnection } from '../Slice/socketSlice'; */
+
+const MainWrapper = styled.main`
+  width: 100%;
+  height: 100%;
+`;
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -119,9 +125,10 @@ const Login = () => {
       <nav className={styles.navBar}>
         <span>Carpool!!!</span>
       </nav>
-      <div className={styles.formContainer}>
-        <LoginForm className={styles.loginForm}>
-          {/*           <input
+      <MainWrapper>
+        <div className={styles.formContainer}>
+          <LoginForm className={styles.loginForm}>
+            {/*           <input
             type="email"
             value={email}
             onChange={handleEmailChange}
@@ -130,8 +137,8 @@ const Login = () => {
             required={true}
             placeholder="Email"
           /> */}
-          <span>Login to enjoy offers while riding</span>
-          {/*           <TextInput
+            <span>Login to enjoy offers while riding</span>
+            {/*           <TextInput
             key="email"
             type="email"
             value={email}
@@ -141,7 +148,7 @@ const Login = () => {
             required={true}
             placeholder="Email"
           /> */}
-          {/*           <input
+            {/*           <input
             type="text"
             value={username}
             onChange={handleUsernameChange}
@@ -150,26 +157,26 @@ const Login = () => {
             required={true}
             placeholder="Username"
           /> */}
-          <TextInput
-            key="username"
-            type="text"
-            value={username}
-            onchange={handleUsernameChange}
-            className={styles.userName}
-            autoFocus={true}
-            required={true}
-            placeholder="Username"
-          />
-          <TextInput
-            key="password"
-            type="password"
-            value={password}
-            onchange={handlePasswordChange}
-            className={styles.userName}
-            required={true}
-            placeholder="Password"
-          />
-          {/*           <input
+            <TextInput
+              key="username"
+              type="text"
+              value={username}
+              onchange={handleUsernameChange}
+              className={styles.userName}
+              autoFocus={true}
+              required={true}
+              placeholder="Username"
+            />
+            <TextInput
+              key="password"
+              type="password"
+              value={password}
+              onchange={handlePasswordChange}
+              className={styles.userName}
+              required={true}
+              placeholder="Password"
+            />
+            {/*           <input
             className="login-password"
             required={true}
             type="password"
@@ -178,11 +185,11 @@ const Login = () => {
             placeholder="Password"
           /> */}
 
-          <div>
-            <span>Don't have an account?</span>
-            <a href="/createProfile">Sign up now</a>
-          </div>
-          {/*           <button
+            <div>
+              <span>Don't have an account?</span>
+              <a href="/createProfile">Sign up now</a>
+            </div>
+            {/*           <button
             type="button"
             onClick={handleSubmit}
             name="Login"
@@ -192,13 +199,14 @@ const Login = () => {
             {" "}
             LOG IN{" "}
           </button> */}
-          <SubmitButton
-            submitform={handleSubmit}
-            className={styles.submitButton}
-            disabled={disable}
-          ></SubmitButton>
-        </LoginForm>
-      </div>
+            <SubmitButton
+              submitform={handleSubmit}
+              className={styles.submitButton}
+              disabled={disable}
+            ></SubmitButton>
+          </LoginForm>
+        </div>
+      </MainWrapper>
 
       {/* 
 

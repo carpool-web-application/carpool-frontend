@@ -1,10 +1,16 @@
+.header {
+  width: 100%;
+  height: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: black;
+}
+
 .riderhomenavmenu {
   border-color: black;
   background-color: black;
   position: fixed;
-  /* display: flex;
-  justify-content: space-around;
-  align-items: center; */
   box-sizing: border-box;
   width: 100%;
 }
@@ -12,6 +18,8 @@
 .mainnav {
   display: flex;
   list-style: none;
+  box-sizing: border-box;
+  margin: 0%;
 }
 
 .pushleft {
@@ -36,7 +44,7 @@
   position: relative;
   top: 0.3rem;
 }
-.riderhomenavmenu a {
+.header a {
   color: #f6f4e6;
   text-decoration: none;
   font-size: 1.5em;

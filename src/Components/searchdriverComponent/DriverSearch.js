@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import TextInput from "../Common/TextInput";
+import SearchDriverButton from "../Common/SearchDriverButton";
 
 const DriverSearch = ({ showButton, setDirectionCall, openModal }) => {
   const [origin, setOrigin] = useState("");
@@ -149,7 +150,7 @@ const DriverSearch = ({ showButton, setDirectionCall, openModal }) => {
         className="login-username"
       />
 
-      {showButton == true ? <SearchDriverButton /> : <Alert />}
+      {showButton === true ? <SearchDriverButton /> : SearchDriverButton}
     </form>
   );
 };

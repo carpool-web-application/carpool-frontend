@@ -8,15 +8,26 @@ import {
 import PaymentComp from "../Payment/payment";
 import GetClosestDriver from "./GetClosestDriver";
 import emailjs from "emailjs-com";
-import "./Search.css";
+import styles from "./Search.module.css";
 import RiderNavBar from "../Navbar/rider/navBarComponent-rider.js";
-import GifComponent from "../Navbar/gifcomponent.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SearchDriverButton from "../Components/Common/SearchDriverButton.js";
 import Alert from "../Components/Common/alert.js";
 import MapComponent from "../Components/Common/MapComponent.js";
 import ModalComponent from "../Components/Common/modalcomponent.js";
+
+/* const main = styled.main`
+  height: 95%;
+  width: 100%;
+`;
+
+const div = styled.div`
+  border: 2px solid black;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: row;
+`; */
 
 const libraries = ["places"];
 const RiderFinder = () => {
@@ -175,107 +186,100 @@ const RiderFinder = () => {
   };
   //console.log(showPayment == true)
   return (
-    <div className="main-page">
-      <div className="rider-search-navbar-container">
-        <RiderNavBar />
-        {/* <GifComponent /> */}
-      </div>
+    <>
+      <RiderNavBar />
+      <main className={styles.main}>
+        <div className={styles.container}>
+          <div className={styles.searchcontainerform}>
+            <form className={styles.searchloginform}>
+              <Autocomplete>
+                <input
+                  id="origin"
+                  type="text"
+                  name="Origin"
+                  ref={originRef}
+                  className={styles.loginusername}
+                  autoFocus={true}
+                  required={true}
+                  placeholder="From?"
+                />
+              </Autocomplete>
 
-      <div className="seacrh-container">
-        <div className="search-container-form">
-          <form className="search-login-form">
-            <p className="search-login-text">
-              <span className="fa-stack fa-lg">
-                <i className="fa fa-circle fa-stack-2x"></i>
-                <i className="fa fa-lock fa-stack-1x"></i>
-              </span>
-            </p>
-            <Autocomplete>
+              <Autocomplete>
+                <input
+                  id="destination"
+                  type="text"
+                  name="Destination"
+                  ref={destinationRef}
+                  className={styles.loginusername}
+                  autoFocus={true}
+                  required={true}
+                  placeholder="Where to?"
+                />
+              </Autocomplete>
+
               <input
-                id="origin"
-                type="text"
-                name="Origin"
-                ref={originRef}
-                className="login-username"
-                autoFocus={true}
+                className={styles.loginusername}
                 required={true}
-                placeholder="From?"
+                id="pickUpTime"
+                type="datetime-local"
+                value={pickUpTime}
+                onChange={onPickUpTimeChange}
+                placeholder="Time Please! "
               />
-            </Autocomplete>
 
-            <Autocomplete>
               <input
-                id="destination"
-                type="text"
-                name="Destination"
-                ref={destinationRef}
-                className="login-username"
-                autoFocus={true}
-                required={true}
-                placeholder="Where to?"
+                id="seats"
+                type="number"
+                value={seats}
+                onChange={onSeatChange}
+                className={styles.loginusername}
+                placeholder="Seats"
               />
-            </Autocomplete>
 
-            <input
-              className="login-username"
-              required={true}
-              id="pickUpTime"
-              type="datetime-local"
-              value={pickUpTime}
-              onChange={onPickUpTimeChange}
-              placeholder="Time Please! "
-            />
+              {showButton === true ? (
+                <SearchDriverButton searchForRide={searchForRide} />
+              ) : (
+                <Alert />
+              )}
+            </form>
+          </div>
 
-            <input
-              id="seats"
-              type="number"
-              value={seats}
-              onChange={onSeatChange}
-              className="login-username"
-            />
-
-            {showButton === true ? (
-              <SearchDriverButton searchForRide={searchForRide} />
-            ) : (
-              <Alert />
-            )}
-          </form>
-        </div>
-        <div className="driver-modal">
-          {isOpen && (
-            <ModalComponent toggleModal={toggleModal}>
-              <GetClosestDriver
-                startLat={origin.latProp}
-                startLon={origin.lngProp}
-                endLat={destination.latProp}
-                endLon={destination.lngProp}
-                seats={seats}
-                origin={originRef.current.value}
-                destination={destinationRef.current.value}
-                riderID={parsedData?.userName}
-              />{" "}
-            </ModalComponent>
-          )}
-        </div>
-        {/*         {diplayDrivers === true ? (
-          <div>{isOpen && <ModalComponent toggleModal={toggleModal} />}</div>
-        ) : null} */}
-        <div className="map-container">
-          <MapComponent directions={directions} />
-          {showPayment === true ? (
-            <div className="payment-rider">
-              <PaymentComp
-                cost={calculateCost}
-                riderEmail="rutuja.patil17@vit.edu"
-                riderUserName="riderRutuja"
-              />
+          {diplayDrivers === true ? (
+            <div className={styles.drivermodal}>
+              {isOpen && (
+                <ModalComponent toggleModal={toggleModal}>
+                  <GetClosestDriver
+                    startLat={origin.latProp}
+                    startLon={origin.lngProp}
+                    endLat={destination.latProp}
+                    endLon={destination.lngProp}
+                    seats={seats}
+                    origin={originRef.current.value}
+                    destination={destinationRef.current.value}
+                    riderID={parsedData?.userName}
+                  />
+                </ModalComponent>
+              )}
             </div>
-          ) : (
-            <p></p>
-          )}
+          ) : null}
+          <div className={styles.mapcontainer}>
+            <MapComponent directions={directions} />
+            {showPayment === true ? (
+              <div className={styles.paymentrider}>
+                <PaymentComp
+                  cost={calculateCost}
+                  riderEmail="rutuja.patil17@vit.edu"
+                  riderUserName="riderRutuja"
+                />
+              </div>
+            ) : (
+              <p></p>
+            )}
+          </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 

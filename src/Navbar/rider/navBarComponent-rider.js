@@ -4,6 +4,11 @@ import { removeRider } from "../../Slice/riderSlice";
 import { Link } from "react-router-dom";
 import styles from "./navBarComponent-rider.module.css";
 
+/* const Header = styled.header`
+  box-sizing: border-box;
+  width: 100%;
+`; */
+
 const RiderNavBar = ({ riderData }) => {
   const riderId = riderData?.userName;
   const dispatch = useDispatch();
@@ -13,7 +18,8 @@ const RiderNavBar = ({ riderData }) => {
   };
 
   return (
-    <div className={styles.riderhomenavmenu}>
+    <header className={styles.header}>
+      {/* <nav className={styles.riderhomenavmenu}> */}
       <ul className={styles.mainnav}>
         <div className={styles.pushleft}>
           <li>
@@ -96,7 +102,9 @@ const RiderNavBar = ({ riderData }) => {
           </li>
         </div>
       </ul>
-    </div>
+      {/* 
+      </nav> */}
+    </header>
   );
 };
 
