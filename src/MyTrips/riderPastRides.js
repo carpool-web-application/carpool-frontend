@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import RiderPastOrders from "./riderOrderitems.js";
-import "./riderPastRides.css";
+import styles from "./riderPastRides.module.css";
 import RiderNavBar from "../Navbar/rider/navBarComponent-rider.js";
 import styled from "styled-components";
 
@@ -126,11 +126,21 @@ const RiderMyTrips = () => {
   return (
     <>
       <RiderNavBar />
-      <Main>
-        <div className="rider-past-rides-container">
-          <div className="grid-conatiner-view-riders">{DriverOrderData}</div>
+      <main className={styles.ridermain}>
+        <div className={styles.riderpastridescontainer}>
+          {/* <div className="grid-conatiner-view-riders">{DriverOrderData}</div> */}
+          <table className={styles.riderTable}>
+            <thead>
+              <tr>
+                <th>Driver Name</th>
+                <th>Cost</th>
+                <th>Destination</th>
+              </tr>
+            </thead>
+            <tbody>{DriverOrderData}</tbody>
+          </table>
         </div>
-      </Main>
+      </main>
     </>
   );
 };
