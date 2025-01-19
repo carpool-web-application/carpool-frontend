@@ -2,9 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import RiderPastOrders from "./riderOrderitems.js";
+import { useDispatch } from "react-redux";
 import styles from "./riderPastRides.module.css";
 import RiderNavBar from "../Navbar/rider/navBarComponent-rider.js";
 import styled from "styled-components";
+import { riderRequestDetails } from "../Utils/utils.js";
+import { removeRider } from "../../src/Slice/riderSlice.js";
 
 const Main = styled.main`
   height: 95%;
@@ -18,55 +21,44 @@ const RiderMyTrips = () => {
   const [rating, setsetRating] = useState(0);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   if (!driverData) {
     navigate("/login");
   }
 
   useEffect(() => {
-    //showRideInformation();
     showCommuterInformation();
   }, []);
-
-  /*   const showRideInformation = async () => {
-    try {
-      const response = await fetch(`http://localhost:9000/riderRequest/`);
-      if (response.ok) {
-        const data = await response.json();
-       // console.log(data)
-        const filteredDrivers = data.filter(item =>
-            item.CommuteStatus === 'Approved' &&
-            item.DriverId ===  driverId // Change column5 to the desired column for filtering
-          );
-        setRideRequest(filteredDrivers);
-      } else {
-        setError('Failed to fetch profile data');
-      }
-    } catch (error) {
-      setError('Failed to fetch profile data');
-    }
-  }; */
   const showCommuterInformation = async () => {
     try {
-      const response = await fetch(`http://localhost:9000/riderRequest/`);
-      if (response.ok) {
-        const orderdata = await response.json();
+      const response = await riderRequestDetails(
+        driverData.userId,
+        driverData.token
+      );
 
-        if (Array.isArray(orderdata)) {
-          const filteredDriverOrder = orderdata.filter(
-            (item) =>
-              item.DriverPostStatus !== "Cancelled" && item.RiderId === driverId // Change column5 to the desired column for filtering
-          );
-          //console.log(filteredDriverOrder)
-          setRiderOrders(filteredDriverOrder);
-        } else if (
-          orderdata.DriverPostStatus !== "Cancelled" &&
-          orderdata.RiderId === driverId
-        ) {
-          setRiderOrders(orderdata);
-        } else {
-          setError("Failed to data");
-        }
+      if (response.status.toString() === "401".toString()) {
+        dispatch(removeRider());
+        navigate("/login");
+      }
+      if (!response.ok) {
+        console.error("there is no value from the database");
+        return;
+      }
+      const orderdata = await response.json();
+
+      console.log(orderdata);
+
+      if (Array.isArray(orderdata)) {
+        const filteredDriverOrder = orderdata.filter(
+          (item) => item.DriverPostStatus !== "Cancelled" // Change column5 to the desired column for filtering
+        );
+        //console.log(filteredDriverOrder)
+        setRiderOrders(filteredDriverOrder);
+      } else if (orderdata.DriverPostStatus !== "Cancelled") {
+        setRiderOrders(orderdata);
+      } else {
+        setError("Failed to data");
       }
     } catch (error) {
       setError("Failed to fetch profile data");
