@@ -16,6 +16,7 @@ import SearchDriverButton from "../Components/Common/SearchDriverButton.js";
 import Alert from "../Components/Common/alert.js";
 import MapComponent from "../Components/Common/MapComponent.js";
 import ModalComponent from "../Components/Common/modalcomponent.js";
+import { riderRequest } from "../Utils/utils.js";
 
 /* const main = styled.main`
   height: 95%;
@@ -57,27 +58,25 @@ const RiderFinder = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const existingRecord = await fetch(
-        `http://localhost:9000/riderRequest/${parsedData?.userName}`
+      const existingRecord = await riderRequest(
+        parsedData?.userId,
+        parsedData?.token
       );
       const existingRecordData = await existingRecord.json();
       if (!existingRecordData) {
         setShowButton(true);
         return;
       } else if (existingRecordData.length > 0) {
-        const recordRequested = existingRecordData.filter(
-          (record) => record.CommuteStatus == "Requested"
-        );
         const recordPayment = existingRecordData.filter(
           (record) =>
-            record.CommuteStatus == "Approved" && record.PaymentFlag == "N"
+            record.CommuteStatus === "Approved" && record.PaymentFlag == "N"
         );
         if (recordPayment.length > 0) {
           setshowPayment(true);
           return;
         }
       } else if (
-        existingRecordData.CommuteStatus == "Approved" &&
+        existingRecordData.CommuteStatus === "Approved" &&
         existingRecordData.PaymentFlag === "N"
       ) {
         setshowPayment(true);
@@ -86,7 +85,7 @@ const RiderFinder = () => {
     }
 
     fetchData();
-  }, [showButton, showPayment, parsedData?.userName]);
+  }, [showButton, showPayment, parsedData?.token, parsedData?.userId]);
 
   const originRef = useRef();
   const destinationRef = useRef();

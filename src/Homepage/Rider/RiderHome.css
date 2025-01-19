@@ -20,20 +20,16 @@
 }
 
 .rider-profle-container {
-  position: absolute;
   border-radius: 20px;
-  border: 2px solid black;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border-style: solid;
+  border-color: rgb(243, 243, 243);
   width: 50%;
   height: 60%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(50%, 20%);
   justify-content: center;
   align-items: center;
-  background-color: #05386b;
+  /* background-color: #05386b; */
   transition: box-shadow 0.3s ease;
-  display: flex;
 }
 
 [class*="underlay"] {
@@ -58,18 +54,8 @@
 }
 
 .rider-card {
-  /*   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  height: 300px;
-  margin: auto;
-  text-align: center;
-  font-family: arial;
-  background-color: #f6f4e6;
-  border-radius: 25%;
-  position: absolute; */
   height: 100%;
   width: 100%;
-  position: absolute;
 }
 /* .rider-card img {
   width: 100%;
@@ -113,11 +99,11 @@
 }
 
 .rider-profile-details {
-  position: relative;
   height: 40%;
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .rider-card h1 {
@@ -133,7 +119,6 @@
   font-size: 28px;
   background-color: transparent;
   margin-top: 10px;
-  padding: 10px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-style: italic;
   font-weight: bold;

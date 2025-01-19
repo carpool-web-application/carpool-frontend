@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import "./RiderHome.css";
 import * as firebase from "../../Config/firebase-config.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -7,22 +6,21 @@ import RiderNavBar from "../../Navbar/rider/navBarComponent-rider.js";
 import ProfilePicture from "./Component/ProfilePicture.js";
 import { useSelector } from "react-redux";
 import ProfileDetails from "../Rider/Component/ProfileDetails.js";
+import { getRiderDetails } from "../../Utils/utils.js";
 
-const libraries = ["places"];
 const Rider = () => {
   /*    const storedData = localStorage.getItem('rider');
   const driverData = JSON.parse(storedData); */
   const driverData = useSelector((state) => state.rider.rider);
-  const driverId = driverData.userName;
+  const driverId = driverData.userId;
   const [profileData, setProfileData] = useState([]);
   const [rating, setsetRating] = useState(0);
   const [error, setError] = useState("");
-  const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
 
   const showProfileInformation = async () => {
     try {
-      const response = await fetch(`http://localhost:9000/riders/${driverId}`);
+      const response = await getRiderDetails(driverId, driverData.token);
       if (response.ok) {
         const data = await response.json();
         setProfileData(data);
@@ -44,7 +42,6 @@ const Rider = () => {
             );
           }
         }
-
         const ratings = data.ratings; // Use the updated data from response.json()
         if (ratings.length > 0) {
           const sum = ratings.reduce((acc, rating) => acc + rating, 0);
