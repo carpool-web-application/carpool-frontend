@@ -7,7 +7,7 @@ import {
   createDriverUser,
   createRiderUser,
 } from "../Utils/Signup/SignUp";
-import "./ProfileCreation.css";
+import styles from "./ProfileCreation.module.css";
 
 const ProfileCreation = () => {
   const [username, setUsername] = useState("");
@@ -150,75 +150,74 @@ const ProfileCreation = () => {
     }
   };
 
-  /*   if (redirectToLogin) {
-    return <Redirect to="/login" />;
-  } */
-
   return (
-    <div className="register-parent-container">
-      <div className="register-gif-container"></div>
-      <div className="register-container">
-        <form className="signup-login-form">
-          <p className="profile-login-text">
-            <span className="fa-stack fa-lg">
-              <i className="fa fa-circle fa-stack-2x"></i>
-              <i className="fa fa-lock fa-stack-1x"></i>
-            </span>
-          </p>
-          <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            className="login-username"
-            autoFocus={true}
-            required={true}
-            placeholder="Email"
-          />
-          <input
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
-            className="login-username"
-            autoFocus={true}
-            required={true}
-            placeholder="Username"
-          />
-          <input
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-            className="login-username"
-            autoFocus={true}
-            required={true}
-            placeholder="name"
-          />
-          <input
-            className="login-password"
-            required={true}
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder="Password"
-          />
-          <select
-            id="commuterType"
-            name="commuterType"
-            className="profile-login-username"
-            value={commuterType}
-            onChange={handlecommuterTypeChange}
-          >
-            <option value="">Select</option>
-            <option value="Rider">Rider</option>
-            <option value="Driver">Driver</option>
-          </select>
-          <div className="register-button-container">
+    <div className={styles.registerParentContainer}>
+      <div className={styles.registerContainer}>
+        <form className={styles.signUpForm}>
+          <div className={styles.inputLabelContainer}>
             <input
-              type="submit"
-              onClick={handleSubmit}
-              name="Login"
-              value="CREATE PROFILE"
-              className="profile-login-submit"
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              autoFocus={true}
+              required={true}
+              placeholder="Email"
             />
+            <label>Email Address</label>
+          </div>
+
+          <div className={styles.inputLabelContainer}>
+            <input
+              type="text"
+              value={username}
+              onChange={handleUsernameChange}
+              autoFocus={true}
+              required={true}
+              placeholder="Username"
+            />
+            <label>User Name</label>
+          </div>
+
+          <div className={styles.inputLabelContainer}>
+            <input
+              type="text"
+              value={name}
+              onChange={handleNameChange}
+              autoFocus={true}
+              required={true}
+              placeholder="name"
+            />
+            <label>Name</label>
+          </div>
+
+          <div className={styles.inputLabelContainer}>
+            <input
+              required={true}
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder="Password"
+            />
+            <label>Password</label>
+          </div>
+
+          <div className={styles.selector}>
+            <select
+              id="commuterType"
+              name="commuterType"
+              value={commuterType}
+              onChange={handlecommuterTypeChange}
+            >
+              <option value="">Select</option>
+              <option value="Rider">Rider</option>
+              <option value="Driver">Driver</option>
+            </select>
+          </div>
+
+          <div className={styles.registerButton}>
+            <button type="submit" onClick={handleSubmit}>
+              CREATE PROFILE
+            </button>
           </div>
 
           <a href="/login" className="login">

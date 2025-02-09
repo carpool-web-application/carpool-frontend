@@ -30,7 +30,14 @@ const Navbar = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/riderLogin" element={<Search />} />
         <Route path="/driverLogin" element={<DriverComp />} />
-        <Route path="/driverHome" element={<DriverHome />} />
+        <Route
+          path="/driverHome"
+          element={
+            <ProtectedRoutes>
+              <DriverHome />
+            </ProtectedRoutes>
+          }
+        />
         <Route
           path="/riderHome"
           element={
@@ -39,7 +46,14 @@ const Navbar = () => {
             </ProtectedRoutes>
           }
         />
-        <Route path="/driverApproval" element={<DriverApproval />} />
+        <Route
+          path="/driverApproval"
+          element={
+            <ProtectedRoutes>
+              <DriverApproval />
+            </ProtectedRoutes>
+          }
+        />
         <Route path="/pastRides" element={<DriverPastRides />} />
         <Route path="/riderpastRides" element={<RiderPastRides />} />
       </Routes>
