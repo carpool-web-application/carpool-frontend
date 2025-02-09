@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { riderProfileDetails } from "../../../Utils/utils";
-import styles from "../Component/profileDetails.module.css";
-const ProfileDetails = ({ profileData }) => {
+import styles from "../Component/driverprofileDetails.module.css";
+const DriverProfileDetails = ({ profileData }) => {
   // State to hold input values
-  const [riderName, setRiderName] = useState("");
-  const [riderEmail, setRiderEmail] = useState("");
-  const [riderPhone, setRiderPhone] = useState("");
+  const [driverName, setDriverName] = useState("");
+  const [driverEmail, setDriverEmail] = useState("");
+  const [driverPhone, setDriverPhone] = useState("");
+
   console.log(profileData);
   // Update state when profileData changes
   useEffect(() => {
     if (profileData) {
-      setRiderName(profileData.RiderName || "");
-      setRiderEmail(profileData.RiderEmail || "");
-      setRiderPhone(profileData.RiderPhone || "");
+      setDriverName(profileData.DriverName || "");
+      setDriverEmail(profileData.DriverEmail || "");
+      setDriverPhone(profileData.DriverPhone || "");
     }
   }, [profileData]);
 
@@ -27,8 +28,8 @@ const ProfileDetails = ({ profileData }) => {
         <input
           type="text"
           required={true}
-          value={riderName}
-          onChange={(e) => setRiderName(e.target.value)}
+          value={driverName}
+          onChange={(e) => setDriverName(e.target.value)}
         />
       </div>
       <div className={styles.riderDetailsContainer}>
@@ -36,8 +37,8 @@ const ProfileDetails = ({ profileData }) => {
         <input
           type="email" // Changed to type email for better input validation
           required={true}
-          value={riderEmail}
-          onChange={(e) => setRiderEmail(e.target.value)}
+          value={driverEmail}
+          onChange={(e) => setDriverEmail(e.target.value)}
         />
       </div>
       <div className={styles.riderDetailsContainer}>
@@ -45,8 +46,8 @@ const ProfileDetails = ({ profileData }) => {
         <input
           type="tel" // Changed to type tel for phone number format
           required={true}
-          value={riderPhone}
-          onChange={(e) => setRiderPhone(e.target.value)}
+          value={driverPhone}
+          onChange={(e) => setDriverPhone(e.target.value)}
         />
       </div>
       <div className={styles.riderRatingContainer}>
@@ -57,4 +58,4 @@ const ProfileDetails = ({ profileData }) => {
   );
 };
 
-export default ProfileDetails;
+export default DriverProfileDetails;

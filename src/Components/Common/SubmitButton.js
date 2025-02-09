@@ -1,16 +1,16 @@
 import "./TextInput.module.css";
 
 function SubmitButton({ submitform, className, disabled }) {
-  console.log(disabled);
   const submitForm = (e) => {
     e.preventDefault();
     if (!disabled) {
+      console.log(e.key);
       submitform();
     }
   };
   return (
     <button
-      type="button"
+      type="submit"
       onClick={submitForm}
       name="Login"
       value="LOG IN"

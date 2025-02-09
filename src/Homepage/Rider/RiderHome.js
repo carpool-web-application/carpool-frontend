@@ -23,7 +23,7 @@ const Rider = () => {
       const response = await getRiderDetails(driverId, driverData.token);
       if (response.ok) {
         const data = await response.json();
-        setProfileData(data);
+        setProfileData({ ...data, token: driverData.token });
         try {
           const userImageRef = await ref(
             firebase.storage,
@@ -65,7 +65,7 @@ const Rider = () => {
   const handleImageUpload = async (data) => {
     const imageRef = ref(
       firebase.storage,
-      `${driverData._id}/${driverData._id}_profile_image`
+      `${driverId}/${driverId}_profile_image`
     );
     uploadBytes(imageRef, data)
       .then((image) => {
@@ -80,11 +80,6 @@ const Rider = () => {
       .catch((error) => {
         console.error("Error uploading image:", error);
       });
-    /* 
-     const fileRef = storageRef.child(`${driverId}/${driverId}_profile_image`);
-    await fileRef.put(file);
-    const imageUrl = await fileRef.getDownloadURL();
-    setImageUrl(imageUrl); */
   };
 
   const handleClick = () => {
@@ -94,7 +89,6 @@ const Rider = () => {
   return (
     <div className="rider-home-main-page">
       <RiderNavBar />
-      {/* <GifComponent /> */}
       <div className="rider-profle-container">
         <div className="rider-card">
           <ProfilePicture
