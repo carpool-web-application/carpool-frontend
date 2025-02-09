@@ -9,7 +9,7 @@ const Driverapproval = () => {
   /*   const storedData = localStorage.getItem('driver');
   const driverData? = JSON.parse(storedData); */
   const driverData = useSelector((state) => state.driver.driver);
-  const driverId = driverData?.userName;
+  const driverId = driverData?.DriverId;
   const [rideRequest, setRideRequest] = useState([]);
   const [driverOrders, setDriverOrders] = useState([]);
   const [rating, setsetRating] = useState(0);
@@ -146,12 +146,6 @@ const Driverapproval = () => {
       <div className="driver-approval-page-navarea">
         <DriverNavBar driver={driverData} />
       </div>
-
-      {/*         <div className="alert">
-                <span className="closebtn">&times;</span>  
-                <strong>Hey, {driverId} </strong> You have a Ride Request !
-        </div> */}
-
       <div className="data-area">{data}</div>
     </div>
   );
