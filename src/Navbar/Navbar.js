@@ -7,12 +7,13 @@ import DriverComp from "../Driver/DriverCreateRide.js";
 import AboutPage from "../AboutPage.js";
 import Login from "../Login/LoginComp.js";
 import Home from "../Home/Home.js";
-import DriverHome from "../Home/DriverHome.js";
+import DriverHome from "../Homepage/Driver/DriverHome.js";
 import RiderHome from "../Homepage/Rider/RiderHome.js";
 import Payment from "../Payment/payment";
 import DriverApproval from "../DriverApproval/driverApproval.js";
 import DriverPastRides from "../DriverPastRides/driverPastRides.js";
 import RiderPastRides from "../MyTrips/riderPastRides.js";
+import { ProtectedRoutes } from "../Utils/ProtectedRoutes.js";
 import { io } from "socket.io-client";
 export const socket = io("http://localhost:9000");
 const Navbar = () => {
@@ -30,7 +31,14 @@ const Navbar = () => {
         <Route path="/riderLogin" element={<Search />} />
         <Route path="/driverLogin" element={<DriverComp />} />
         <Route path="/driverHome" element={<DriverHome />} />
-        <Route path="/riderHome" element={<RiderHome />} />
+        <Route
+          path="/riderHome"
+          element={
+            <ProtectedRoutes>
+              <RiderHome />
+            </ProtectedRoutes>
+          }
+        />
         <Route path="/driverApproval" element={<DriverApproval />} />
         <Route path="/pastRides" element={<DriverPastRides />} />
         <Route path="/riderpastRides" element={<RiderPastRides />} />

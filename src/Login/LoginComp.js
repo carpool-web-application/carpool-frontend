@@ -70,7 +70,6 @@ const Login = () => {
       );
     }
     const existingRecordData = await existingRecordResponse.json();
-    console.log("existing record data ---->", existingRecordData);
     if (existingRecordData.commuterType === "Rider") {
       setRiderLoginButton(true);
       dispatch(storeRider(existingRecordData));

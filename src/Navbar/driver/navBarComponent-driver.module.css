@@ -1,0 +1,70 @@
+.header {
+  width: 100%;
+  height: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: black;
+}
+
+.riderhomenavmenu {
+  border-color: black;
+  background-color: black;
+  position: fixed;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.mainnav {
+  display: flex;
+  list-style: none;
+  box-sizing: border-box;
+  margin: 0%;
+}
+
+.pushleft {
+  display: flex;
+  gap: 20px;
+}
+
+.pushright {
+  display: flex;
+  margin-left: auto;
+  gap: 10px;
+  padding-right: 20px;
+}
+.endFlex {
+  display: flex;
+  align-items: center;
+}
+
+.profileIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: relative;
+  top: 0.3rem;
+}
+.header a {
+  color: #f6f4e6;
+  text-decoration: none;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: inline-block;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  transition: all 0.2s ease-in-out;
+}
+
+.rider-seacrh-gif-container {
+  position: absolute;
+  height: 150px;
+  width: 250px;
+  left: 0%;
+}
+
+.rider-carpool-gif {
+  z-index: 3;
+  position: absolute;
+  height: 150px;
+  width: 250px;
+}

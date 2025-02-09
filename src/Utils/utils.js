@@ -47,3 +47,28 @@ export const riderRequestDetails = async (userId, token) => {
   );
   return riderRequest;
 };
+
+export const riderProfileDetails = async (userId, token, body) => {
+  const userUpdate = await fetch(`${apiUrl}/userAuths/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+    },
+    body: body.JSON.stringify(),
+  });
+
+  return userUpdate;
+};
+
+export const driverDetails = async (driverId, token) => {
+  const driverDetails = await fetch(`${apiUrl}/drivers/${driverId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+    },
+  });
+
+  return driverDetails;
+};

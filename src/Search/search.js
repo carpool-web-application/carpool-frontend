@@ -6,7 +6,7 @@ import {
   Autocomplete,
 } from "@react-google-maps/api";
 import PaymentComp from "../Payment/payment";
-import GetClosestDriver from "./GetClosestDriver";
+import GetClosestDriver from "./Components/GetClosestDriver.js";
 import emailjs from "emailjs-com";
 import styles from "./Search.module.css";
 import RiderNavBar from "../Navbar/rider/navBarComponent-rider.js";
