@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import DriverPastOrders from "./driverOrderitems.js";
-import "./driverOrderItems.css";
-import "./driverPastRides.css";
+import DriverPastOrders from "./Components/driverOrderitems.js";
+import "./Components/driverOrderitems.js";
+import styles from "./driverPastRides.module.css";
 import DriverNavBar from "../Navbar/driver/navBarComponent-driver.js";
 import { useSelector } from "react-redux";
 
@@ -19,34 +19,13 @@ const DriverPastRides = () => {
     //showRideInformation();
     showCommuterInformation();
   }, []);
-
-  /*   const showRideInformation = async () => {
-    try {
-      const response = await fetch(`http://localhost:9000/riderRequest/`);
-      if (response.ok) {
-        const data = await response.json();
-       // console.log(data)
-        const filteredDrivers = data.filter(item =>
-            item.CommuteStatus === 'Approved' &&
-            item.DriverId ===  driverId // Change column5 to the desired column for filtering
-          );
-        setRideRequest(filteredDrivers);
-      } else {
-        setError('Failed to fetch profile data');
-      }
-    } catch (error) {
-      setError('Failed to fetch profile data');
-    }
-  }; */
   const showCommuterInformation = async () => {
     try {
-      console.log(driverData);
       const response = await fetch(
         `http://localhost:9000/riderOrders/${driverId}`
       );
       if (response.ok) {
         const orderdata = await response.json();
-        // console.log(orderdata)
         const filteredDriverOrder = orderdata.filter(
           (item) =>
             item.DriverPostStatus !== "Cancelled" && item.CommuteStatus !== null
@@ -109,7 +88,7 @@ const DriverPastRides = () => {
       />
     ));
   return (
-    <div>
+    <div className={styles.driverPastRidesContainer}>
       <DriverNavBar driver={driverData} />
       <div className="grid-conatiner-view-drivers">{DriverOrderData}</div>
     </div>
