@@ -65,3 +65,16 @@
 .userName:focus {
   border-color: black;
 }
+
+.profileIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: 0.3rem;
+  top: 10px;
+  left: 90%;
+}
+
+.passwordComponent {
+  position: relative;
+}

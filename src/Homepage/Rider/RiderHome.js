@@ -7,6 +7,7 @@ import ProfilePicture from "./Component/ProfilePicture.js";
 import { useSelector } from "react-redux";
 import ProfileDetails from "../Rider/Component/ProfileDetails.js";
 import { getRiderDetails } from "../../Utils/utils.js";
+import Loader from "../../loaderComponent/Loader.js";
 
 const Rider = () => {
   /*    const storedData = localStorage.getItem('rider');
@@ -17,6 +18,7 @@ const Rider = () => {
   const [rating, setsetRating] = useState(0);
   const [error, setError] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [load, setLoad] = useState(true);
 
   const showProfileInformation = async () => {
     try {
@@ -27,7 +29,7 @@ const Rider = () => {
         try {
           const userImageRef = await ref(
             firebase.storage,
-            `${driverData._id}/${driverData._id}_profile_image`
+            `${driverId}/${driverId}_profile_image`
           );
           const url = await getDownloadURL(userImageRef);
           setImageUrl(url);
@@ -50,6 +52,7 @@ const Rider = () => {
         } else {
           setsetRating(0);
         }
+        setLoad((prev) => !prev);
       } else {
         setError("Failed to fetch profile data");
       }
@@ -89,19 +92,33 @@ const Rider = () => {
   return (
     <div className="rider-home-main-page">
       <RiderNavBar />
-      <div className="rider-profle-container">
-        <div className="rider-card">
-          <ProfilePicture
-            imageUrl={imageUrl}
-            handleClick={handleClick}
-            handleImageUpload={handleImageUpload}
-          />
 
-          <div className="rider-profile-details">
-            <ProfileDetails profileData={profileData} />
+      {load ? (
+        <div
+          style={{
+            display: "flex", // Use flexbox to center the child component
+            justifyContent: "center", // Center horizontally
+            alignItems: "center", // Center vertically
+            height: "100vh", // Make the div take the full height of the viewport
+          }}
+        >
+          <Loader />
+        </div>
+      ) : (
+        <div className="rider-profle-container">
+          <div className="rider-card">
+            <ProfilePicture
+              imageUrl={imageUrl}
+              handleClick={handleClick}
+              handleImageUpload={handleImageUpload}
+            />
+
+            <div className="rider-profile-details">
+              <ProfileDetails profileData={profileData} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
