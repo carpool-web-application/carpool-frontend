@@ -66,9 +66,6 @@ const ProfileCreation = () => {
       return;
     }
 
-    // Submit the form
-    alert("Sign up successfull!");
-    navigate("/login");
     event.preventDefault();
     let postDriver = false;
     let postRider = false;
@@ -79,8 +76,9 @@ const ProfileCreation = () => {
     // const recordExists = existingRecordData.some(record => record.userName === username || record.userPassword === password );
     let payload;
     if (existingRecordData) {
-      setError("Record with same username already exists! Lets loginnnnn");
+      alert("Record with same username already exists! Lets loginnnnn");
       setShowLoginButton(true);
+      navigate("/login");
       return;
     } else {
       try {
@@ -148,6 +146,10 @@ const ProfileCreation = () => {
         }
       }
     }
+
+    // Submit the form
+    alert("Sign up successfull!");
+    navigate("/login");
   };
 
   return (

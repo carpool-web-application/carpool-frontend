@@ -25,6 +25,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [riderLoginButton, setRiderLoginButton] = useState(false);
   const [driverLoginButton, setDriverLoginButton] = useState(false);
+  const [passwordType, setPasswordType] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -55,19 +56,13 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
-    setDisable((prev) => (prev = true));
     const payload = {
       userName: username,
       userPassword: password,
     };
     const existingRecordResponse = await login(payload);
     if (!existingRecordResponse.ok) {
-      return (
-        <div className="alert">
-          <span className="closebtn">&times;</span>
-          <strong>OOps! Authentication Issues Suspected. </strong>
-        </div>
-      );
+      alert("OOPs username or passowrd is not corect");
     }
     const existingRecordData = await existingRecordResponse.json();
     if (existingRecordData.commuterType === "Rider") {
@@ -88,12 +83,21 @@ const Login = () => {
     }
   };
 
+  const togglePasswordType = (e) => {
+    e.preventDefault();
+    if (passwordType === "text") {
+      setPasswordType((type) => (type = "password"));
+    } else {
+      setPasswordType((type) => (type = "text"));
+    }
+  };
+
   return (
     <div className={styles.loginparentcontainer}>
       <nav className={styles.navBar}>
         <span>Carpool!!!</span>
       </nav>
-      <MainWrapper>
+      <main>
         <div className={styles.formContainer}>
           <LoginForm className={styles.loginForm}>
             <span>Login to enjoy offers while riding</span>
@@ -108,15 +112,37 @@ const Login = () => {
               required={true}
               placeholder="Username"
             />
-            <TextInput
-              key="password"
-              type="password"
-              value={password}
-              onchange={handlePasswordChange}
-              className={styles.userName}
-              required={true}
-              placeholder="Password"
-            />
+            <div className={styles.passwordComponent}>
+              <TextInput
+                key="password"
+                type={passwordType}
+                value={password}
+                onchange={handlePasswordChange}
+                className={styles.userName}
+                required={true}
+                placeholder="Password"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class={styles.profileIcon}
+                onClick={togglePasswordType}
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+              </svg>
+            </div>
 
             <div>
               <span>Don't have an account?</span>
@@ -130,7 +156,7 @@ const Login = () => {
             ></SubmitButton>
           </LoginForm>
         </div>
-      </MainWrapper>
+      </main>
     </div>
   );
 };

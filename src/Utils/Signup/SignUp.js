@@ -13,7 +13,7 @@ export const userExits = async (username, token) => {
 };
 
 export const createUser = async (userPayload) => {
-  const createUser = await fetch(`${apiUrl}/userAuths/`, {
+  const createUser = await fetch(`${apiUrl}/userAuths/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

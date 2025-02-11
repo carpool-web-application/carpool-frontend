@@ -5,7 +5,7 @@ const Navbar = React.lazy(() => import("./Navbar/Navbar"));
 function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Navbar />;
+      <Navbar />
     </Suspense>
   );
 }
