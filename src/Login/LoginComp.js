@@ -7,24 +7,15 @@ import { storeDriver } from "../Slice/driverSlice";
 import { storeRider } from "../Slice/riderSlice.js";
 import TextInput from "../Components/Common/TextInput.js";
 import SubmitButton from "../Components/Common/SubmitButton.js";
-import styled from "styled-components";
 import { login } from "../Utils/utils.js";
 /* import { setupConnection } from '../Slice/socketSlice'; */
-
-const MainWrapper = styled.main`
-  width: 100%;
-  height: 100%;
-`;
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disable, setDisable] = useState(true);
-  const [email, setEmail] = useState("");
-  const [commuterStatus, setCommuterStatus] = useState("");
+  const [errorFlag, setErrorFlag] = useState(false);
   const [error, setError] = useState("");
-  const [riderLoginButton, setRiderLoginButton] = useState(false);
-  const [driverLoginButton, setDriverLoginButton] = useState(false);
   const [passwordType, setPasswordType] = useState("password");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,37 +32,30 @@ const Login = () => {
     setPassword(data);
   };
 
-  const handleEmailChange = (data) => {
-    setEmail(data);
-  };
-
-  const handleCommuterStatusChange = (event) => {
-    setCommuterStatus(event.target.value);
-  };
-  const handlRiderLogin = () => {
-    navigate("/riderLogin");
-  };
-  const handleDriverLogin = () => {
-    navigate("/driverLogin");
-  };
-
   const handleSubmit = async () => {
     const payload = {
       userName: username,
       userPassword: password,
     };
     const existingRecordResponse = await login(payload);
+    console.log(existingRecordResponse);
     if (!existingRecordResponse.ok) {
-      alert("OOPs username or passowrd is not corect");
+      setError("credentails are incorrect");
+      setErrorFlag(true);
+      return;
     }
+
+    setError("");
+    setErrorFlag(false);
+
     const existingRecordData = await existingRecordResponse.json();
     if (existingRecordData.commuterType === "Rider") {
-      setRiderLoginButton(true);
+      //setRiderLoginButton(true);
       dispatch(storeRider(existingRecordData));
       navigate("/riderLogin");
       return;
     } else if (existingRecordData.commuterType === "Driver") {
-      setDriverLoginButton(true);
+      //setDriverLoginButton(true);
       dispatch(storeDriver(existingRecordData));
       navigate("/driverLogin");
       return;
@@ -91,7 +75,7 @@ const Login = () => {
       setPasswordType((type) => (type = "text"));
     }
   };
-
+  console.log(errorFlag);
   return (
     <div className={styles.loginparentcontainer}>
       <nav className={styles.navBar}>
@@ -101,13 +85,12 @@ const Login = () => {
         <div className={styles.formContainer}>
           <LoginForm className={styles.loginForm}>
             <span>Login to enjoy offers while riding</span>
-
             <TextInput
               key="username"
               type="text"
               value={username}
               onchange={handleUsernameChange}
-              className={styles.userName}
+              className={errorFlag ? styles.userNameError : styles.userName}
               autoFocus={true}
               required={true}
               placeholder="Username"
@@ -118,7 +101,7 @@ const Login = () => {
                 type={passwordType}
                 value={password}
                 onchange={handlePasswordChange}
-                className={styles.userName}
+                className={errorFlag ? styles.userNameError : styles.userName}
                 required={true}
                 placeholder="Password"
               />
@@ -143,12 +126,23 @@ const Login = () => {
                 />
               </svg>
             </div>
-
+            {errorFlag ? (
+              <div
+                style={{
+                  color: "red",
+                  fontWeight: "bold",
+                  wordWrap: "break-word", // Breaks long words to prevent overflow
+                  whiteSpace: "normal", // Ensures text behaves in a standard way regarding whitespace
+                  overflowWrap: "break-word", // Ensures any text exceeding the width of the container breaks onto a new line
+                }}
+              >
+                {error}
+              </div>
+            ) : null}
             <div>
               <span>Don't have an account?</span>
               <a href="/createProfile">Sign up now</a>
             </div>
-
             <SubmitButton
               submitform={handleSubmit}
               className={styles.submitButton}
