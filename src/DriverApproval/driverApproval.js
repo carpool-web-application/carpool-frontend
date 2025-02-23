@@ -42,7 +42,7 @@ const Driverapproval = () => {
 
   const showProfileInformation = async () => {
     try {
-      const response = await fetch(`http://localhost:9000/riderRequest/`);
+      const response = await fetch(`http://localhost:9000/rideRequest/`);
       if (response.ok) {
         const data = await response.json();
         // console.log(data)
@@ -110,7 +110,7 @@ const Driverapproval = () => {
     setRideRequest(
       rideRequest.filter((rideRequests) => rideRequests.RiderId !== riderId)
     );
-    fetch(`http://localhost:9000/riderRequest/${riderId}`, {
+    fetch(`http://localhost:9000/rideRequest/${riderId}`, {
       //fetch api with the call back function
       method: "DELETE",
     })

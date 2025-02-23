@@ -17,7 +17,8 @@ import Alert from "../Components/Common/alert.js";
 import MapComponent from "../Components/Common/MapComponent.js";
 import ModalComponent from "../Components/Common/modalcomponent.js";
 import { riderRequest } from "../Utils/utils.js";
-
+import { useDispatch } from "react-redux";
+import { storeRider } from "../Slice/riderSlice.js";
 /* const main = styled.main`
   height: 95%;
   width: 100%;
@@ -47,7 +48,7 @@ const RiderFinder = () => {
   const [showButton, setShowButton] = useState(false);
   const [costPerSeat, setCostPerSeat] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
@@ -59,9 +60,13 @@ const RiderFinder = () => {
   useEffect(() => {
     async function fetchData() {
       const existingRecord = await riderRequest(
-        parsedData?.userId,
+        parsedData?.id,
         parsedData?.token
       );
+      if (!existingRecord.ok) {
+        dispatch(storeRider({}));
+        navigate("/login");
+      }
       const existingRecordData = await existingRecord.json();
       if (!existingRecordData) {
         setShowButton(true);

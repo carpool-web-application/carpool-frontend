@@ -11,7 +11,7 @@
   border: 2px solid black;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   width: 30%;
-  height: 60%;
+  height: auto;
   position: relative;
   background-color: white;
 }
@@ -30,11 +30,12 @@
   position: relative;
   display: flex;
   justify-content: center;
+  height: 40px;
 }
 
 .inputLabelContainer input {
   width: 90%;
-  height: 20px;
+  height: 100%;
 }
 
 .inputLabelContainer label {
@@ -70,13 +71,12 @@
 
 .registerButton {
   width: 100%;
-  height: 50px;
+  height: 40px;
   display: flex;
   justify-content: center;
 }
 
 .registerButton button {
-  height: 50%;
   width: 50%;
   border-radius: 10px;
   color: whitesmoke;

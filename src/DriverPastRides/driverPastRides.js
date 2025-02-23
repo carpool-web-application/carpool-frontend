@@ -43,7 +43,7 @@ const DriverPastRides = () => {
     setDriverOrders(
       driverOrders.filter((rideRequests) => rideRequests.DriverId !== driverID)
     );
-    fetch(`http://localhost:9000/riderRequest/${driverID}`, {
+    fetch(`http://localhost:9000/rideRequest/${driverID}`, {
       //fetch api with the call back function
       method: "DELETE",
     })

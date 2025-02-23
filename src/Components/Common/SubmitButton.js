@@ -1,6 +1,6 @@
 import "./TextInput.module.css";
 
-function SubmitButton({ submitform, className, disabled }) {
+function SubmitButton({ submitform, className, disabled, text }) {
   const submitForm = (e) => {
     e.preventDefault();
     if (!disabled) {
@@ -17,8 +17,7 @@ function SubmitButton({ submitform, className, disabled }) {
       className={className}
       disabled={disabled}
     >
-      {" "}
-      LOG IN{" "}
+      {text}
     </button>
   );
 }

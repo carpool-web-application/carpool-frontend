@@ -15,49 +15,55 @@ const Rider = () => {
   const driverData = useSelector((state) => state.rider.rider);
   const driverId = driverData.userId;
   const [profileData, setProfileData] = useState([]);
-  const [rating, setsetRating] = useState(0);
-  const [error, setError] = useState("");
+  const [rating, setRating] = useState(0);
   const [imageUrl, setImageUrl] = useState("");
   const [load, setLoad] = useState(true);
+
+  const defaultImageUrl =
+    "https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg";
+
+  const fetchImage = async (driverId) => {
+    try {
+      const userImageRef = await ref(
+        firebase.storage,
+        `${driverId}/${driverId}_profile_image`
+      );
+      return await getDownloadURL(userImageRef);
+    } catch (error) {
+      if (error.code === "storage/object-not-found") {
+        return defaultImageUrl;
+      } else {
+        throw new Error("Failed to fetch image");
+      }
+    }
+  };
+
+  const calculateAverageRating = (ratings) => {
+    if (ratings.length > 0) {
+      const sum = ratings.reduce((acc, rating) => acc + rating, 0);
+      return sum / ratings.length;
+    }
+    return 0;
+  };
 
   const showProfileInformation = async () => {
     try {
       const response = await getRiderDetails(driverId, driverData.token);
-      if (response.ok) {
-        const data = await response.json();
-        setProfileData({ ...data, token: driverData.token });
-        try {
-          const userImageRef = await ref(
-            firebase.storage,
-            `${driverId}/${driverId}_profile_image`
-          );
-          const url = await getDownloadURL(userImageRef);
-          setImageUrl(url);
-        } catch (error) {
-          if (error.code === "storage/object-not-found") {
-            setImageUrl(
-              "https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
-            );
-          } else {
-            setImageUrl(
-              "https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
-            );
-          }
-        }
-        const ratings = data.ratings; // Use the updated data from response.json()
-        if (ratings.length > 0) {
-          const sum = ratings.reduce((acc, rating) => acc + rating, 0);
-          const average = sum / ratings.length;
-          setsetRating(average);
-        } else {
-          setsetRating(0);
-        }
-        setLoad((prev) => !prev);
-      } else {
-        setError("Failed to fetch profile data");
-      }
+      if (!response.ok) throw new Error("Failed to fetch profile data");
+
+      const data = await response.json();
+      setProfileData({ ...data, token: driverData.token });
+
+      const imageUrl = await fetchImage(driverId);
+      setImageUrl(imageUrl);
+
+      const averageRating = calculateAverageRating(data.ratings);
+      setRating(averageRating);
+      console.log(data.ratings);
     } catch (error) {
-      setError("Failed to fetch profile data");
+      console.error(error.message);
+    } finally {
+      setLoad((prev) => !prev);
     }
   };
 

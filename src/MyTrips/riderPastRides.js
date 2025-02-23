@@ -69,7 +69,7 @@ const RiderMyTrips = () => {
     setRiderOrders(
       riderOrders.filter((rideRequests) => rideRequests.RiderId !== riderID)
     );
-    fetch(`http://localhost:9000/riderRequest/${riderID}`, {
+    fetch(`http://localhost:9000/rideRequest/${riderID}`, {
       //fetch api with the call back function
       method: "DELETE",
     })

@@ -2,6 +2,8 @@
   position: relative;
   width: 250px;
   margin: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .riderDetailsContainer input {
@@ -36,4 +38,13 @@
   background: white;
   font-weight: bold;
   margin: 10px;
+}
+
+.submitButton {
+  width: 250px;
+  height: 40px;
+  border-radius: 10px;
+  border-color: black;
+  color: white;
+  background-color: #1e1e1e;
 }

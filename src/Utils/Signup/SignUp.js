@@ -1,7 +1,7 @@
 const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const userExits = async (username, token) => {
-  const userDetails = await fetch(`${apiUrl}/userAuths/${username}`, {
+  const userDetails = await fetch(`${apiUrl}/carpool/v1/user/${username}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +13,7 @@ export const userExits = async (username, token) => {
 };
 
 export const createUser = async (userPayload) => {
-  const createUser = await fetch(`${apiUrl}/userAuths/signup`, {
+  const createUser = await fetch(`${apiUrl}/carpool/v1/user/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,30 +23,4 @@ export const createUser = async (userPayload) => {
   });
 
   return createUser;
-};
-
-export const createDriverUser = async (userPayload) => {
-  const createDriverUser = await fetch(`${apiUrl}/drivers/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      //Authorization: `Bearer ${token}`, // token is not required as it is a normal fetch
-    },
-    body: JSON.stringify(userPayload),
-  });
-
-  return createDriverUser;
-};
-
-export const createRiderUser = async (userPayload) => {
-  const createRiderUser = await fetch(`${apiUrl}/riders/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      //Authorization: `Bearer ${token}`, // token is not required as it is a normal fetch
-    },
-    body: JSON.stringify(userPayload),
-  });
-
-  return createRiderUser;
 };

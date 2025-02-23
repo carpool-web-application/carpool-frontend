@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Search from "../Search/search.js";
-import DriverRide from "../Driver/DriverCreateRide.js";
+import DriverRide from "../PostCommute/DriverCreateRide.js";
 import CreateProfile from "../User/UserProfileCreation.js";
-import DriverComp from "../Driver/DriverCreateRide.js";
+import DriverComp from "../PostCommute/DriverCreateRide.js";
 import AboutPage from "../AboutPage.js";
 import Login from "../Login/LoginComp.js";
 import Home from "../Home/Home.js";
@@ -20,7 +20,6 @@ const Navbar = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/DriverRide" element={<DriverRide />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/search" element={<Search />} />
         <Route path="/payment" element={<Payment />} />
