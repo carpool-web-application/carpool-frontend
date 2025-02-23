@@ -2,7 +2,7 @@ const apiUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const getRiderDetails = async (driverId, token) => {
   console.log(driverId);
-  const driverDetails = await fetch(`${apiUrl}/riders/${driverId}`, {
+  const driverDetails = await fetch(`${apiUrl}/carpool/v1/riders/${driverId}`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`, // Include the token in the Authorization header
@@ -12,7 +12,7 @@ export const getRiderDetails = async (driverId, token) => {
 };
 
 export const login = async (payload) => {
-  const userDetails = await fetch(`${apiUrl}/userAuths/login`, {
+  const userDetails = await fetch(`${apiUrl}/carpool/v1/user/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,19 +24,22 @@ export const login = async (payload) => {
 };
 
 export const riderRequest = async (userId, token) => {
-  const riderRequest = await fetch(`${apiUrl}/riderRequest/${userId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-    },
-  });
+  const riderRequest = await fetch(
+    `${apiUrl}/carpool/v1/rideRequest/${userId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+      },
+    }
+  );
   return riderRequest;
 };
 
 export const riderRequestDetails = async (userId, token) => {
   const riderRequest = await fetch(
-    `${apiUrl}/riderRequest/${userId}/getPastRides`,
+    `${apiUrl}/rideRequest/${userId}/carpool/v1/getPastRides`,
     {
       method: "GET",
       headers: {
@@ -49,20 +52,20 @@ export const riderRequestDetails = async (userId, token) => {
 };
 
 export const riderProfileDetails = async (userId, token, body) => {
-  const userUpdate = await fetch(`${apiUrl}/userAuths/${userId}`, {
-    method: "PUT",
+  const userUpdate = await fetch(`${apiUrl}/carpool/v1/user/${userId}`, {
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`, // Include the token in the Authorization header
     },
-    body: body.JSON.stringify(),
+    body: JSON.stringify(body),
   });
 
   return userUpdate;
 };
 
 export const driverDetails = async (driverId, token) => {
-  const driverDetails = await fetch(`${apiUrl}/drivers/${driverId}`, {
+  const driverDetails = await fetch(`${apiUrl}/carpool/v1/user/${driverId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

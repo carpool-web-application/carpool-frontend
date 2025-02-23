@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { riderProfileDetails } from "../../../Utils/utils";
 import styles from "../Component/profileDetails.module.css";
+import SubmitButton from "../../../Components/Common/SubmitButton";
 const ProfileDetails = ({ profileData }) => {
   // State to hold input values
   const [riderName, setRiderName] = useState("");
@@ -10,15 +11,17 @@ const ProfileDetails = ({ profileData }) => {
   // Update state when profileData changes
   useEffect(() => {
     if (profileData) {
-      setRiderName(profileData.RiderName || "");
-      setRiderEmail(profileData.RiderEmail || "");
-      setRiderPhone(profileData.RiderPhone || "");
+      setRiderName(profileData.userName || "");
+      setRiderEmail(profileData.userEmail || "");
+      setRiderPhone(profileData.PhoneNumber || "");
     }
   }, [profileData]);
 
   // Function to handle the Save button click
   const handleSave = async () => {
-    const updateUser = await riderProfileDetails();
+    await riderProfileDetails(profileData.UserId, profileData.token, {
+      PhoneNumber: riderPhone,
+    });
   };
   return (
     <>
@@ -28,6 +31,7 @@ const ProfileDetails = ({ profileData }) => {
           type="text"
           required={true}
           value={riderName}
+          disabled={true}
           onChange={(e) => setRiderName(e.target.value)}
         />
       </div>
@@ -49,10 +53,20 @@ const ProfileDetails = ({ profileData }) => {
           onChange={(e) => setRiderPhone(e.target.value)}
         />
       </div>
-      <div className={styles.riderRatingContainer}>
-        <label>Ratings:</label> {profileData.ratings}
+      <div className={styles.riderDetailsContainer}>
+        <label>Ratings:</label>
+        <input
+          type="tel" // Changed to type tel for phone number format
+          disabled={true}
+          value={profileData.averageRating}
+          onChange={(e) => setRiderPhone(e.target.value)}
+        />
       </div>
-      <button onClick={handleSave}>Save</button>
+      <SubmitButton
+        submitform={handleSave}
+        text="Save"
+        className={styles.submitButton}
+      />
     </>
   );
 };

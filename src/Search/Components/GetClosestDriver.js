@@ -138,14 +138,14 @@ const GetClosestDriver = (props) => {
     alert("Request Sent!");
     const newOrderNumber = Math.floor(Math.random() * 1000000000).toString();
     const existingRecord = await fetch(
-      `http://localhost:9000/riderRequest/${props.riderID}`
+      `http://localhost:9000/rideRequest/${props.riderID}`
     );
     const existingRecordData = await existingRecord.json();
     // Filter the results based on the username field
     if (!existingRecordData) {
       //console.error('existingRecordData is null or undefined');
       try {
-        const response = await fetch(`http://localhost:9000/riderRequest/`, {
+        const response = await fetch(`http://localhost:9000/rideRequest/`, {
           //fetch api with the call back function
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -184,7 +184,7 @@ const GetClosestDriver = (props) => {
         } else {
           try {
             const response = await fetch(
-              `http://localhost:9000/riderRequest/${props.riderID}`,
+              `http://localhost:9000/rideRequest/${props.riderID}`,
               {
                 //fetch api with the call back function
                 method: "POST",
@@ -224,7 +224,7 @@ const GetClosestDriver = (props) => {
     }
     else {
       try {
-        const response = await fetch(`http://localhost:9000/riderRequest/${props.riderID}`, { //fetch api with the call back function
+        const response = await fetch(`http://localhost:9000/rideRequest/${props.riderID}`, { //fetch api with the call back function
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
