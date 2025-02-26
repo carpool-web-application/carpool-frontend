@@ -1,0 +1,104 @@
+.pastRidesContainer {
+  width: 100%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5%;
+}
+
+.title span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.rideContainer {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rideContainerDetails {
+  height: 95%;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(auto-fill, minmax(auto, 150px));
+  grid-gap: 10px 20px;
+  padding: 20px;
+  justify-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.detailsContainer {
+  border: 1px solid grey;
+  box-shadow: 2px 2px 2px grey;
+  border-radius: 10px;
+  width: 90%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.detailsContainer:hover {
+  background-color: white;
+}
+
+.pastRidesCount {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 5%;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 90px;
+}
+
+.rideDetails {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.buttonsContainer {
+  height: 30%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentDetails {
+  display: flex;
+  justify-content: flex-start; /* Aligns content to the left */
+  align-items: center; /* Keeps items centered vertically */
+  width: 100%; /* Ensures the flex container takes full width of its parent */
+}
+
+.contentDetails:first-child {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.detailsContainer {
+  position: relative;
+}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./RiderHome.css";
+import styles from "./RiderHome.module.css";
 import * as firebase from "../../Config/firebase-config.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import RiderNavBar from "../../Navbar/rider/navBarComponent-rider.js";
@@ -9,7 +9,7 @@ import ProfileDetails from "../Rider/Component/ProfileDetails.js";
 import { getRiderDetails } from "../../Utils/utils.js";
 import Loader from "../../loaderComponent/Loader.js";
 
-const Rider = () => {
+const RiderHome = () => {
   /*    const storedData = localStorage.getItem('rider');
   const driverData = JSON.parse(storedData); */
   const driverData = useSelector((state) => state.rider.rider);
@@ -96,7 +96,7 @@ const Rider = () => {
   };
 
   return (
-    <div className="rider-home-main-page">
+    <div className={styles.riderHomeMainPage}>
       <RiderNavBar />
 
       {load ? (
@@ -111,16 +111,18 @@ const Rider = () => {
           <Loader />
         </div>
       ) : (
-        <div className="rider-profle-container">
-          <div className="rider-card">
-            <ProfilePicture
-              imageUrl={imageUrl}
-              handleClick={handleClick}
-              handleImageUpload={handleImageUpload}
-            />
+        <div className={styles.homePageContainer}>
+          <div className={styles.riderProfleContainer}>
+            <div className={styles.riderCard}>
+              <ProfilePicture
+                imageUrl={imageUrl}
+                handleClick={handleClick}
+                handleImageUpload={handleImageUpload}
+              />
 
-            <div className="rider-profile-details">
-              <ProfileDetails profileData={profileData} />
+              <div className={styles.riderProfileDetails}>
+                <ProfileDetails profileData={profileData} />
+              </div>
             </div>
           </div>
         </div>
@@ -129,4 +131,4 @@ const Rider = () => {
   );
 };
 
-export default Rider;
+export default RiderHome;

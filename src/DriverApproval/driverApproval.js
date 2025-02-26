@@ -3,7 +3,7 @@ import RideRequestItems from "../rideRequestItems/rideRequestItems.js";
 import { useSelector } from "react-redux";
 import "../DriverApproval/DriverApproval.css";
 import DriverNavBar from "../Navbar/driver/navBarComponent-driver.js";
-import { socket } from "../Navbar/Navbar";
+import { socket } from "../App.js";
 
 const Driverapproval = () => {
   /*   const storedData = localStorage.getItem('driver');

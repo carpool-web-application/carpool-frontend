@@ -23,10 +23,10 @@ const RiderNavBar = ({ riderData }) => {
       <ul className={styles.mainnav}>
         <div className={styles.pushleft}>
           <li>
-            <Link to="/riderLogin">Carpoool!!!</Link>
+            <Link to="/searchRide">Carpoool!!!</Link>
           </li>
           <li>
-            <Link to="/riderLogin">
+            <Link to="/searchRide">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"

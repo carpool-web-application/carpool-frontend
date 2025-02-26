@@ -1,12 +1,16 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700);
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
-.rider-home-main-page {
-  height: 100%;
+.riderHomeMainPage {
+  height: 95%;
   width: 100%;
 }
 
-.rider-profle-container {
+.homePageContainer {
+  height: 100%;
+}
+
+.riderProfleContainer {
   border-radius: 20px;
   border-style: solid;
   border-color: rgb(243, 243, 243);
@@ -21,7 +25,7 @@
   background-color: white;
 }
 
-.rider-card {
+.riderCard {
   height: 100%;
   width: 100%;
 }
@@ -29,7 +33,7 @@
   width: 100%;
 } */
 
-.rider-profile-image {
+.riderProfileImage {
   width: 100%;
   height: 50%;
   position: relative;
@@ -38,24 +42,24 @@
   justify-content: center;
 }
 
-.rider-profile-image img {
+.riderProfileImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
 
-.rider-profile-button {
+.riderProfileButton {
   height: 40px;
   border-radius: 20px;
 }
 
-.rider-profile-image-container {
+.riderProfileImageContainer {
   position: relative;
   height: 50%;
 }
 
-.rider-profile-container {
+.riderProfileContainer {
   position: relative;
   top: 20%;
   display: flex;
@@ -63,12 +67,12 @@
   border-color: black;
 }
 
-.rider-profile-image img {
+.riderProfileImage img {
   width: 30%;
   height: 100%;
 }
 
-.rider-profile-details {
+.riderProfileDetails {
   height: 40%;
   width: 100%;
   display: flex;

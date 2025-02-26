@@ -1,10 +1,14 @@
+.driver-home-main-page {
+  height: 100%;
+  width: 100%;
+}
 .driver-profle-container {
   position: absolute;
   border-radius: 20px;
   border: 2px solid black;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   width: 50%;
-  height: 60%;
+  height: auto;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -38,6 +42,11 @@
 .driver-profile-image-container {
   position: relative;
   height: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .driver-profile-container {
@@ -53,12 +62,15 @@
 }
 
 .driver-profile-details {
-  height: 40%;
+  height: auto;
   width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .driver-card {

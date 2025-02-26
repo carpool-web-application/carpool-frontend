@@ -8,7 +8,7 @@ import SubmitButton from "../Components/Common/SubmitButton.js";
 import { login } from "../Utils/utils.js";
 /* import { setupConnection } from '../Slice/socketSlice'; */
 
-const Login = () => {
+const Login = ({ setExpiryTime, setIsAuthenticated, setTimer }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disable, setDisable] = useState(true);
@@ -48,15 +48,19 @@ const Login = () => {
     setErrorFlag(false);
 
     const existingRecordData = await existingRecordResponse.json();
+    handleSession(existingRecordData.token);
+    setExpiryTime(Date.now() + 3600000);
+    setIsAuthenticated(true);
+    setTimer();
     if (existingRecordData.commuterType === "Rider") {
       //setRiderLoginButton(true);
       dispatch(storeRider(existingRecordData));
-      navigate("/riderLogin");
+      navigate("/searchRide");
       return;
     } else if (existingRecordData.commuterType === "Driver") {
       //setDriverLoginButton(true);
       dispatch(storeDriver(existingRecordData));
-      navigate("/driverLogin");
+      navigate("/createRide");
       return;
     } else {
       <div className="alert">
@@ -73,6 +77,11 @@ const Login = () => {
     } else {
       setPasswordType((type) => (type = "text"));
     }
+  };
+
+  const handleSession = (token) => {
+    localStorage.setItem("auth", token);
+    sessionStorage.setItem("authTime", Date.now() + 10000);
   };
   return (
     <div className={styles.loginparentcontainer}>

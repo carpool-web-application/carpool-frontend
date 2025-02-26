@@ -1,7 +1,8 @@
 .riderDetailsContainer {
   position: relative;
-  width: 250px;
+  width: 90%;
   margin: 10px;
+  display: flex;
 }
 
 .riderDetailsContainer input {
@@ -36,4 +37,18 @@
   background: white;
   font-weight: bold;
   margin: 10px;
+}
+
+.driverVechileContainer {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.driverDetails {
+  width: 50%;
+}
+
+.vehicleDetails {
+  width: 50%;
 }
