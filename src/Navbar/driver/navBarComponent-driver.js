@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import styles from "../driver/navBarComponent-driver.module.css";
 import { useDispatch } from "react-redux";
 import { removeDriver } from "../../Slice/driverSlice";
-import { teardownConnection, messageSocket } from "../../Slice/socketSlice";
+import RideHistory from "../../DriverRides/RideHistory";
 import { Link } from "react-router-dom";
-import { socket } from "../Navbar";
+import { socket } from "../../App.js";
 
 const DriverNavBar = ({ driver }) => {
   const [notificationCount, setNotificationCount] = useState(0);
@@ -39,7 +39,7 @@ const DriverNavBar = ({ driver }) => {
     <header className={styles.header}>
       {/* <div className="driver-navMenu">
         <Link to="/driverHome">Driver Home</Link>
-        <Link to="/driverLogin">Post a Ride</Link>
+        <Link to="/createRide">Post a Ride</Link>
         <Link to="/pastRides">Past Rides</Link>
         <Link to="/driverApproval">Request Approval</Link>
         <Link to="/homePage" onClick={handleLogoutButton}>
@@ -53,7 +53,7 @@ const DriverNavBar = ({ driver }) => {
             <Link to="/driverHome">Carpoool!!!</Link>
           </li>
           <li>
-            <Link to="/driverLogin">
+            <Link to="/createRide">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -72,6 +72,25 @@ const DriverNavBar = ({ driver }) => {
         </div>
 
         <div className={styles.pushright}>
+          <li>
+            <Link to="/pastRide">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className={styles.profileIcon}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m9 14.25 6-6m4.5-3.493V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185ZM9.75 9h.008v.008H9.75V9Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm4.125 4.5h.008v.008h-.008V13.5Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                />
+              </svg>
+              Created History
+            </Link>
+          </li>
           <li>
             <Link to="/pastRides">
               <svg

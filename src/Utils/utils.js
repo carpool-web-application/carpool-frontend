@@ -65,13 +65,16 @@ export const riderProfileDetails = async (userId, token, body) => {
 };
 
 export const driverDetails = async (driverId, token) => {
-  const driverDetails = await fetch(`${apiUrl}/carpool/v1/user/${driverId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-    },
-  });
+  const driverDetails = await fetch(
+    `${apiUrl}/carpool/v1/drivers/${driverId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+      },
+    }
+  );
 
   return driverDetails;
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as firebase from "../../../Config/firebase-config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
+import styles from "../RiderHome.module.css";
 const ProfilePicture = ({ imageUrl, handleClick, handleImageUpload }) => {
   const [error, setError] = useState("");
 
@@ -16,19 +16,19 @@ const ProfilePicture = ({ imageUrl, handleClick, handleImageUpload }) => {
   };
 
   return (
-    <div className="rider-profile-image-container">
-      <div className="rider-profile-image">
+    <div className={styles.riderProfileImageContainer}>
+      <div className={styles.riderProfileImage}>
         <img src={imageUrl} alt="John" />
       </div>
 
-      <div className="rider-profile-container">
+      <div className={styles.riderProfileContainer}>
         <input
           type="file"
           id="fileInput"
           onChange={onClickImageUpload}
           style={{ display: "none" }}
         />
-        <button className="rider-profile-button" onClick={handleUpload}>
+        <button className={styles.riderProfileButton} onClick={handleUpload}>
           Upload Image
         </button>
       </div>
