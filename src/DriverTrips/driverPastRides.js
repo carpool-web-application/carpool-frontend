@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const DriverPastRides = () => {
   /*   const storedData = localStorage.getItem('driver');
   const driverData = JSON.parse(storedData); */
-  const driverData = useSelector((state) => state.driver.driver);
+  const driverData = useSelector((state) => state.user.userData);
   const driverId = driverData.userName;
   const [driverOrders, setDriverOrders] = useState([]);
   const [rating, setsetRating] = useState(0);

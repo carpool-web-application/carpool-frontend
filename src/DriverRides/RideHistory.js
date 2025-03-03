@@ -6,7 +6,7 @@ import { fetchRide, updateStatus } from "../Utils/ride";
 import PastRides from "./Component/PastRides.js";
 const RideHistory = () => {
   const [rideData, setRideData] = useState([]);
-  const driverData = useSelector((state) => state.driver.driver);
+  const driverData = useSelector((state) => state.user.userData);
 
   useEffect(() => {
     fetchRideData();

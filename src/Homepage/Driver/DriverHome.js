@@ -13,8 +13,8 @@ const DriverRide = () => {
   /*  const storedData = localStorage.getItem('driver');
   const driverData = JSON.parse(storedData); */
 
-  const driverData = useSelector((state) => state.driver.driver);
-  const driverId = driverData?.userId;
+  const { userData } = useSelector((state) => state.user);
+  const driverId = userData?.userId;
   const [profileData, setProfileData] = useState();
   const [rating, setRating] = useState(0);
   const [error, setError] = useState("");
@@ -23,10 +23,10 @@ const DriverRide = () => {
   const [load, setLoad] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!driverData) {
+    if (!userData) {
       navigate("/login");
     }
-  }, [driverData, navigate]);
+  }, [userData, navigate]);
 
   // Fetch profile information on component mount
   useEffect(() => {
@@ -40,13 +40,12 @@ const DriverRide = () => {
   const fetchProfileInformation = async () => {
     setLoad(true);
     try {
-      const response = await driverDetails(driverId, driverData.token);
+      const response = await driverDetails(driverId, userData?.token);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
         setProfileData(data);
         fetchProfileImage();
-        calculateAverageRating(data.ratings);
+        calculateAverageRating(data?.ratings);
       } else {
         throw new Error("Failed to fetch profile data");
       }
@@ -95,7 +94,7 @@ const DriverRide = () => {
       const snapshot = await uploadBytes(imageRef, file);
       const downloadURL = await getDownloadURL(snapshot.ref);
       setImageUrl(downloadURL);
-      console.log(downloadURL);
+      setLoad(false);
     } catch (error) {
       console.error("Error uploading image:", error);
     }
@@ -107,23 +106,30 @@ const DriverRide = () => {
 
   return (
     <div className="driver-home-main-page">
-      <DriverNavBar driver={driverData} />
-      <div className="driver-profle-container">
-        <div className="driver-card">
-          <DriverProfilePicture
-            imageUrl={imageUrl}
-            handleClick={handleClick}
-            handleImageUpload={handleImageUpload}
-          />
-          {profileData ? (
-            <div className="driver-profile-details">
-              <DriverProfileDetails profileData={profileData} />
-            </div>
-          ) : (
-            <>Loading profile data or no profile available...</>
-          )}
+      {load ? (
+        <>
+          <Loader />
+        </>
+      ) : (
+        <div className="driver-profle-container">
+          <div className="driver-card">
+            <DriverProfilePicture
+              imageUrl={imageUrl}
+              handleClick={handleClick}
+              handleImageUpload={handleImageUpload}
+            />
+            {profileData ? (
+              <div className="driver-profile-details">
+                <DriverProfileDetails profileData={profileData} />
+              </div>
+            ) : (
+              <>
+                <Loader />
+              </>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "../driver/navBarComponent-driver.module.css";
 import { useDispatch } from "react-redux";
-import { removeDriver } from "../../Slice/driverSlice";
-import RideHistory from "../../DriverRides/RideHistory";
+import { removeUser } from "../../Slice/userSlice";
 import { Link } from "react-router-dom";
-import { socket } from "../../App.js";
+import { removeAuth } from "../../Slice/authSlice";
+// import { socket } from "../../App.js";
 
 const DriverNavBar = ({ driver }) => {
   const [notificationCount, setNotificationCount] = useState(0);
@@ -14,7 +14,8 @@ const DriverNavBar = ({ driver }) => {
   const handleLogoutButton = (event) => {
     // Prevent default link behavior to handle logout programmatically
     //dispatch(teardownConnection());  // Dispatch action to disconnect the socket
-    dispatch(removeDriver()); // Dispatch action to remove driver data
+    dispatch(removeUser()); // Dispatch action to remove driver data
+    dispatch(removeAuth());
     // Optionally navigate to a different page programmatically if needed
   };
 
@@ -22,7 +23,7 @@ const DriverNavBar = ({ driver }) => {
     dispatch(messageSocket());
   },[dispatch]); */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const socketListener = socket.on(
       "approval_notification",
       (notificationData) => {
@@ -33,20 +34,10 @@ const DriverNavBar = ({ driver }) => {
         // You can update the UI, show a notification, or perform any other action here
       }
     );
-  }, []); // Run this effect only once when the component mounts
+  }, []); // Run this effect only once when the component mounts */
 
   return (
     <header className={styles.header}>
-      {/* <div className="driver-navMenu">
-        <Link to="/driverHome">Driver Home</Link>
-        <Link to="/createRide">Post a Ride</Link>
-        <Link to="/pastRides">Past Rides</Link>
-        <Link to="/driverApproval">Request Approval</Link>
-        <Link to="/homePage" onClick={handleLogoutButton}>
-          Logout
-        </Link>
-      </div> */}
-      {/* <nav className={styles.riderhomenavmenu}> */}
       <ul className={styles.mainnav}>
         <div className={styles.pushleft}>
           <li>

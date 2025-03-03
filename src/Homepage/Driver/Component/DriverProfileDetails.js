@@ -4,9 +4,9 @@ import styles from "../Component/driverprofileDetails.module.css";
 import SubmitButton from "../../../Components/Common/SubmitButton";
 const DriverProfileDetails = ({ profileData }) => {
   // State to hold input values
-  const [driverName, setDriverName] = useState(profileData.userName);
-  const [driverEmail, setDriverEmail] = useState(profileData.userEmail);
-  const [driverPhone, setDriverPhone] = useState(profileData.PhoneNumber);
+  const [driverName, setDriverName] = useState(profileData?.userName);
+  const [driverEmail, setDriverEmail] = useState(profileData?.userEmail);
+  const [driverPhone, setDriverPhone] = useState(profileData?.PhoneNumber);
   const [licenseNumber, setLicenseNumber] = useState(
     profileData.driverDetails?.licenseNumber
   );
@@ -16,15 +16,6 @@ const DriverProfileDetails = ({ profileData }) => {
   const [platNumber, setPlatNumber] = useState(
     profileData.driverDetails?.vehicle.plateNumber
   );
-
-  // Update state when profileData changes
-  /*   useEffect(() => {
-    if (profileData) {
-      setDriverName(profileData.DriverName || "");
-      setDriverEmail(profileData.DriverEmail || "");
-      setDriverPhone(profileData.DriverPhone || "");
-    }
-  }, [profileData]); */
 
   // Function to handle the Save button click
   const handleSave = async () => {
