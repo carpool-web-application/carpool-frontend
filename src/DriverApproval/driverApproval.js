@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import RideRequestItems from "../rideRequestItems/rideRequestItems.js";
 import { useSelector } from "react-redux";
-import "../DriverApproval/DriverApproval.css";
+import RideRequestItems from "../rideRequestItems/rideRequestItems.js";
+
+import styles from "./DriverApproval.module.css";
 import DriverNavBar from "../Navbar/driver/navBarComponent-driver.js";
-import { socket } from "../App.js";
+// import { socket } from "../CarpoolApplication.js";
 
 const Driverapproval = () => {
   /*   const storedData = localStorage.getItem('driver');
   const driverData? = JSON.parse(storedData); */
-  const driverData = useSelector((state) => state.driver.driver);
+  const driverData = useSelector((state) => state.user.userData);
   const driverId = driverData?.DriverId;
   const [rideRequest, setRideRequest] = useState([]);
   const [driverOrders, setDriverOrders] = useState([]);
@@ -21,7 +22,7 @@ const Driverapproval = () => {
   }, []); 
   */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     fetchInitialData();
 
     socket.on("approval_notification", (notificationData) => {
@@ -33,7 +34,7 @@ const Driverapproval = () => {
     return () => {
       socket.off("newRideRequest");
     };
-  }, [driverId]);
+  }, [driverId]); */
 
   const fetchInitialData = async () => {
     showProfileInformation();
@@ -142,10 +143,8 @@ const Driverapproval = () => {
     ));
 
   return (
-    <div className="driver-approval-page">
-      <div className="driver-approval-page-navarea">
-        <DriverNavBar driver={driverData} />
-      </div>
+    <div className={styles.approvalMain}>
+      <DriverNavBar driver={driverData} />
       <div className="data-area">{data}</div>
     </div>
   );

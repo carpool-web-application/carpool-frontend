@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 import { useDispatch } from "react-redux";
-import { storeDriver } from "../Slice/driverSlice";
-import { storeRider } from "../Slice/riderSlice.js";
+import { storeUser } from "../Slice/userSlice.js";
+import { storeAuth } from "../Slice/authSlice.js";
 import SubmitButton from "../Components/Common/SubmitButton.js";
 import { login } from "../Utils/utils.js";
+import ToastComponent from "../Components/Common/ToastMessage.js";
 /* import { setupConnection } from '../Slice/socketSlice'; */
 
-const Login = ({ setExpiryTime, setIsAuthenticated, setTimer }) => {
+const Login = ({ setTimer }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [disable, setDisable] = useState(true);
@@ -41,6 +42,9 @@ const Login = ({ setExpiryTime, setIsAuthenticated, setTimer }) => {
     if (!existingRecordResponse.ok) {
       setError("credentails are incorrect");
       setErrorFlag(true);
+      setTimeout(() => {
+        setErrorFlag(false);
+      }, 10000);
       return;
     }
 
@@ -49,17 +53,27 @@ const Login = ({ setExpiryTime, setIsAuthenticated, setTimer }) => {
 
     const existingRecordData = await existingRecordResponse.json();
     handleSession(existingRecordData.token);
-    setExpiryTime(Date.now() + 3600000);
-    setIsAuthenticated(true);
+    dispatch(
+      storeUser({
+        userData: existingRecordData,
+      })
+    );
+    dispatch(
+      storeAuth({
+        isAuthenticated: true,
+        expiryTime: Date.now() + 3600000,
+      })
+    );
     setTimer();
+    /*     setExpiryTime(Date.now() + 3600000);
+    setIsAuthenticated(true);
+    setTimer(); */
     if (existingRecordData.commuterType === "Rider") {
       //setRiderLoginButton(true);
-      dispatch(storeRider(existingRecordData));
       navigate("/searchRide");
       return;
     } else if (existingRecordData.commuterType === "Driver") {
       //setDriverLoginButton(true);
-      dispatch(storeDriver(existingRecordData));
       navigate("/createRide");
       return;
     } else {
@@ -81,14 +95,20 @@ const Login = ({ setExpiryTime, setIsAuthenticated, setTimer }) => {
 
   const handleSession = (token) => {
     localStorage.setItem("auth", token);
-    sessionStorage.setItem("authTime", Date.now() + 10000);
+    sessionStorage.setItem("authTime", Date.now() + 3600000);
   };
+
   return (
     <div className={styles.loginparentcontainer}>
       <nav className={styles.navBar}>
         <span>Carpool!!!</span>
       </nav>
       <main className={styles.mainLogin}>
+        {errorFlag ? (
+          <ToastComponent visibility={errorFlag} message={error} />
+        ) : (
+          <></>
+        )}
         <div className={styles.formContainer}>
           <form className={styles.loginForm}>
             <span>Login to enjoy offers while riding</span>

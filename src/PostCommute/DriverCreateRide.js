@@ -2,13 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
 import styles from "./CreateRide.module.css";
-import DriverNavBar from "../Navbar/driver/navBarComponent-driver.js";
 import { useSelector } from "react-redux";
 import { fetchOngoingRide, createRide } from "../Utils/ride.js";
 import SubmitButton from "../Components/Common/SubmitButton.js";
 const libraries = ["places"];
 const DriverRide = () => {
-  const parsedData = useSelector((state) => state.driver.driver);
+  const parsedData = useSelector((state) => state.user.userData);
+  console.log(parsedData);
   const navigate = useNavigate();
   const [data, setData] = useState({
     DriverOrderNumber: "",
@@ -29,12 +29,12 @@ const DriverRide = () => {
   const [destinationLng, setDestinationLng] = useState(0);
   const [pickUpTime, setPickUpTime] = useState("");
   const [directions, setDirections] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
   const [cost, setCost] = useState(0);
   const [seats, setSeats] = useState(0);
   const [showPayment, setshowPayment] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const [error, setError] = useState("");
+  const [errorFlag, setErrorFlag] = useState(false);
 
   const handleSeatsChange = (e) => {
     setSeats(e.target.value);
@@ -60,6 +60,7 @@ const DriverRide = () => {
       setShowButton(true);
     } else {
       setError("Failed to fetch profile data");
+      setErrorFlag(true);
     }
     /*   } catch (error) {
  setError('Failed to fetch profile data');
@@ -89,10 +90,10 @@ const DriverRide = () => {
         //console.log(locationObject.latProp)
         return locationObject;
       } else {
-        setErrorMessage("Error while requesting geocoding API");
+        setError("Error while requesting geocoding API");
       }
     } catch (error) {
-      setErrorMessage("Error while requesting geocoding API");
+      setError("Error while requesting geocoding API");
     }
   };
 
@@ -116,61 +117,20 @@ const DriverRide = () => {
         Availableseats: seats,
       };
       const responseData = await createRide(ridePayload, parsedData.token);
+      console.log(responseData);
       if (!responseData.ok) {
+        setError("Failed to create the Post");
+        setErrorFlag(true);
         console.error("Failed to create the Post");
       }
       const response = responseData.json();
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
-    /*     try {
-      const response = await fetch("http://localhost:9000/riderOrders/", {
-        //fetch api with the call back function
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          DriverOrderNumber: newOrderNumber,
-          DriverId: driverId,
-          StartingLocation: originRef.current.value,
-          Destination: destinationRef.current.value,
-          OriginLatitude: origin.latProp,
-          OriginLongitude: origin.lngProp,
-          DestinationLatitude: destination.latProp,
-          DestinationLongitude: destination.lngProp,
-          driverseats: data.Seats,
-          Availableseats: data.Seats,
-          Cost: data.Cost,
-          DriverPostStatus: "Open",
-        }),
-      });
-      const responsedata = await response.json();
-      console.log(responsedata);
-    } catch (error) {
-      console.error(error);
-    } */
-    /*     setData({
-      DriverOrderNumber: "",
-      DriverId: "",
-      StartingLocation: "",
-      Destination: "",
-      Status: "Open",
-      Seats: "",
-      Cost: "",
-      OriginLatitude: "",
-      OriginLongitude: "",
-      DestinationLatitude: "",
-      DestinationLongitude: "",
-    });
-    originRef.current.value = "";
-    destinationRef.current.value = ""; */
-    //navigate("/driverHome");
   };
 
   return (
     <div className={styles.createPageContainer}>
-      <DriverNavBar driver={parsedData} />
       <div className={styles.addRideContainer}>
         <div className={styles.loginFormContainer}>
           <form className={styles.loginForm}>

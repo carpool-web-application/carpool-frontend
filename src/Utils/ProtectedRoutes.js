@@ -1,22 +1,19 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export const ProtectedRoutes = ({ children }) => {
-  const driverData = useSelector((state) => state.driver.driver);
-  const riderData = useSelector((state) => state.rider.rider);
-  const authenticate = () => {
-    if (driverData || riderData) {
-      return true;
-    }
-    return false;
+export const ProtectedRoutes = ({ children, allowedRoles }) => {
+  const { userData } = useSelector((state) => state.user);
+  const location = useLocation();
+  const checkAuthentication = () => {
+    // Assuming you want to handle different roles differently or extend the logic
+    return allowedRoles.includes(userData.commuterType);
   };
-
-  const isAuthenticated = authenticate();
+  const isAuthenticated = checkAuthentication();
 
   if (!isAuthenticated) {
-    // Redirect them to the login page, but save the current location they were trying to go to
-    return <Navigate to="/login" replace />;
+    // Redirect to the login page, but save the current location they were
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
 
   return children;
