@@ -1,0 +1,28 @@
+.suggestionContainer {
+  display: flex;
+  flex-direction: column;
+  max-height: 1000px;
+  gap: 20px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+}
+.suggestionDetailsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(auto, 500px));
+  grid-template-rows: repeat(auto-fill, minmax(auto, 200px));
+  justify-items: center;
+}
+
+.suggestionItem {
+  height: 100px;
+  width: 250px;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: white;
+}

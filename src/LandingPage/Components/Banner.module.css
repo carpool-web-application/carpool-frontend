@@ -1,0 +1,47 @@
+.BannerContainer {
+  display: flex;
+  height: 600px; /* Adjusted for demonstration */
+  width: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+}
+
+.textContainer {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+}
+
+.mainTextContainer {
+  font-weight: bold;
+  font-size: 50px;
+  width: 500px;
+}
+
+.ctextContainer {
+  width: 500px;
+  display: flex;
+  justify-content: start;
+  font-size: 20px;
+}
+
+.ctextContainer span {
+}
+
+.BannerImage {
+  height: 100%; /* Take full height of BannerContainer */
+  width: 50%; /* Take full width of BannerContainer */
+  display: flex; /* Ensures the img tag can use width and height of this container */
+  justify-content: center;
+  align-items: center;
+}
+
+.BannerImage img {
+  width: 400px; /* Fill the width */
+  height: 300px; /* Fill the height */
+  object-fit: cover; /* Cover the container without losing aspect ratio */
+}
