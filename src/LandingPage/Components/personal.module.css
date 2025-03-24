@@ -1,0 +1,32 @@
+.personalized {
+  height: 700px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  padding: 20px 100px;
+}
+
+.personalizedText {
+  display: flex;
+  flex-direction: column;
+}
+
+.personalizedMainText {
+  color: black;
+  font-size: 50px;
+  margin-left: 20px;
+  width: 500px;
+  font-weight: bold;
+}
+
+.personalizedImage {
+}
+
+.personalizedSmallText {
+  color: black;
+  font-size: 15px;
+  margin-left: 20px;
+  width: 500px;
+}

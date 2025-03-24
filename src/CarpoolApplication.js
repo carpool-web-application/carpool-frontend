@@ -18,7 +18,7 @@ const DriverComp = React.lazy(() =>
 );
 const AboutPage = React.lazy(() => import("./AboutPage.js"));
 const Login = React.lazy(() => import("./Login/LoginComp.js"));
-const Home = React.lazy(() => import("./Home/Home.js"));
+const Home = React.lazy(() => import("./LandingPage/Home.js"));
 const DriverHome = React.lazy(() => import("./Homepage/Driver/DriverHome.js"));
 
 const Payment = React.lazy(() => import("./Payment/payment.js"));
