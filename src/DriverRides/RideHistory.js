@@ -29,7 +29,6 @@ const RideHistory = () => {
   console.log(rideData);
   return (
     <div className={styles.rideHistoryContainer}>
-      <DriverNavBar driver={driverData} />
       <PastRides
         rideData={rideData}
         driverData={driverData}

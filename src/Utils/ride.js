@@ -44,7 +44,6 @@ export const createRide = async (body, token) => {
 };
 
 export const updateStatus = async (userId, body, token) => {
-  console.log(body);
   const updateRide = await fetch(`${apiUrl}/carpool/v1/rides/${userId}`, {
     method: "PUT",
     headers: {
@@ -55,4 +54,35 @@ export const updateStatus = async (userId, body, token) => {
   });
 
   return updateRide;
+};
+
+export const fetchRequestedRide = async (userId, token) => {
+  const fetchRequestedRide = await fetch(
+    `${apiUrl}/carpool/v1/rideRequest/request/${userId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+      },
+    }
+  );
+
+  return fetchRequestedRide;
+};
+
+export const rejectRide = async (requestId, body, token) => {
+  const rejectRide = await fetch(
+    `${apiUrl}/carpool/v1/rideRequest/request/${requestId}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+      },
+      body: JSON.stringify(body),
+    }
+  );
+
+  return rejectRide;
 };

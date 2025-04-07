@@ -1,4 +1,4 @@
-.suggestionContainer {
+.eventsContainer {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -15,14 +15,14 @@
   color: #333; /* Dark grey text for better visibility */
 }
 
-.suggestionDetailsContainer {
+.detailsContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Adjusted to fill the space better */
   grid-gap: 20px; /* Consistent with the gap in the container */
   padding: 20px; /* Padding to ensure items are not flush to edges */
 }
 
-.suggestionItem {
+.eventItem {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,12 +38,12 @@
   text-align: center; /* Center text for better aesthetics */
 }
 
-.suggestionTitle {
+.eventTitle {
   font-size: 16px;
   font-weight: bold;
   color: #333; /* Dark grey for titles */
 }
 
-.suggestionContent {
+.eventContent {
   color: #666; /* Lighter grey for content */
 }
