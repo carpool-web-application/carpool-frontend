@@ -1,60 +1,37 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import RideRequestItems from "../rideRequestItems/rideRequestItems.js";
-
+import { fetchRequestedRide, rejectRide } from "../Utils/ride.js";
 import styles from "./DriverApproval.module.css";
-import DriverNavBar from "../Navbar/driver/navBarComponent-driver.js";
-// import { socket } from "../CarpoolApplication.js";
 
 const Driverapproval = () => {
   /*   const storedData = localStorage.getItem('driver');
   const driverData? = JSON.parse(storedData); */
   const driverData = useSelector((state) => state.user.userData);
-  const driverId = driverData?.DriverId;
+  const driverId = driverData?.userId;
   const [rideRequest, setRideRequest] = useState([]);
   const [driverOrders, setDriverOrders] = useState([]);
-  const [rating, setsetRating] = useState(0);
   const [error, setError] = useState("");
 
-  /*    useEffect( () => {
-    showProfileInformation();
-    showDriverOrderInformation();
-  }, []); 
-  */
-
-  /*   useEffect(() => {
-    fetchInitialData();
-
-    socket.on("approval_notification", (notificationData) => {
-      // Handle the notification data received from the server
-      fetchInitialData();
-      // You can update the UI, show a notification, or perform any other action here
-    });
-
-    return () => {
-      socket.off("newRideRequest");
-    };
-  }, [driverId]); */
+  useEffect(() => {}, []);
 
   const fetchInitialData = async () => {
-    showProfileInformation();
+    showRequestedRide();
     showDriverOrderInformation();
   };
 
-  const showProfileInformation = async () => {
+  const showRequestedRide = async () => {
     try {
-      const response = await fetch(`http://localhost:9000/rideRequest/`);
-      if (response.ok) {
-        const data = await response.json();
-        // console.log(data)
-        const filteredDrivers = data.filter(
-          (item) =>
-            item.CommuteStatus === "Requested" && item.DriverId === driverId // Change column5 to the desired column for filtering
-        );
-        setRideRequest(filteredDrivers);
-      } else {
-        setError("Failed to fetch profile data");
+      const responseData = await fetchRequestedRide(
+        driverId,
+        driverData?.token
+      );
+
+      if (!responseData.ok) {
       }
+
+      const response = await responseData.json();
+      setRideRequest(response);
     } catch (error) {
       setError("Failed to fetch profile data");
     }
@@ -107,25 +84,27 @@ const Driverapproval = () => {
     }
   };
 
-  const removeRequest = (riderId) => {
-    setRideRequest(
-      rideRequest.filter((rideRequests) => rideRequests.RiderId !== riderId)
-    );
-    fetch(`http://localhost:9000/rideRequest/${riderId}`, {
-      //fetch api with the call back function
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to delete reminder status");
-        } else {
-          console.log("Successfully deleted");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        // handle the error
+  const removeRequest = async (requestId, body) => {
+    try {
+      const responseData = await rejectRide(requestId, body, driverData?.token);
+
+      if (!responseData.ok) {
+        // Handle error if the response is not OK, e.g., throw an error or set an error state
+        throw new Error("Failed to reject ride");
+      }
+
+      const response = await responseData.json();
+
+      // Update the state by filtering out the request with the specified requestId
+      setRideRequest((prevRequests) => {
+        return prevRequests.filter(
+          (prevRequest) => prevRequest.requestId !== requestId
+        );
       });
+    } catch (error) {
+      console.error("Error rejecting ride:", error);
+      // Optionally update state to reflect the error
+    }
   };
 
   const data =
@@ -144,7 +123,6 @@ const Driverapproval = () => {
 
   return (
     <div className={styles.approvalMain}>
-      <DriverNavBar driver={driverData} />
       <div className="data-area">{data}</div>
     </div>
   );

@@ -78,12 +78,13 @@ main {
   height: 90%;
 }
 
-footer {
+.footer {
   width: 100%;
   height: 5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: black;
   font-size: 1.5em;
   color: white;
@@ -103,4 +104,10 @@ footer {
   overflow-y: auto;
   overflow-x: hidden;
   flex-direction: column;
+}
+
+.link {
+  /* Styling for native <a> and Link component */
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Inherits color from parent <li> */
 }

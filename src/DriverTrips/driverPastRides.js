@@ -88,7 +88,6 @@ const DriverPastRides = () => {
     ));
   return (
     <div className={styles.driverPastRidesContainer}>
-      <DriverNavBar driver={driverData} />
       <div className="grid-conatiner-view-drivers">{DriverOrderData}</div>
     </div>
   );
