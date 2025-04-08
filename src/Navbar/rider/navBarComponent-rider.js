@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { removeUser } from "../../Slice/userSlice";
+import { removeAuth } from "../../Slice/authSlice";
 import { Link } from "react-router-dom";
 import styles from "./navBarComponent-rider.module.css";
 
@@ -15,6 +16,7 @@ const RiderNavBar = ({ riderData }) => {
 
   const handleLogoutButton = () => {
     dispatch(removeUser());
+    dispatch(removeAuth());
   };
 
   return (

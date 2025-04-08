@@ -1,15 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  GoogleMap,
-  DirectionsRenderer,
-  useJsApiLoader,
-  Autocomplete,
-} from "@react-google-maps/api";
+import { useJsApiLoader, Autocomplete } from "@react-google-maps/api";
 import PaymentComp from "../Payment/payment";
 import GetClosestDriver from "./Components/GetClosestDriver.js";
 import emailjs from "emailjs-com";
 import styles from "./Search.module.css";
-import RiderNavBar from "../Navbar/rider/navBarComponent-rider.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SearchDriverButton from "../Components/Common/SearchDriverButton.js";
@@ -19,23 +13,12 @@ import ModalComponent from "../Components/Common/modalcomponent.js";
 import { riderRequest } from "../Utils/utils.js";
 import { useDispatch } from "react-redux";
 import { storeRider } from "../Slice/riderSlice.js";
-/* const main = styled.main`
-  height: 95%;
-  width: 100%;
-`;
-
-const div = styled.div`
-  border: 2px solid black;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: row;
-`; */
 
 const libraries = ["places"];
 const RiderFinder = () => {
   /*   const storedData = localStorage.getItem('rider');
   const parsedData? = JSON.parse(storedData); */
-  const parsedData = useSelector((state) => state.rider.rider);
+  const parsedData = useSelector((state) => state.user.userData);
   const navigate = useNavigate();
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
@@ -191,7 +174,6 @@ const RiderFinder = () => {
   //console.log(showPayment == true)
   return (
     <>
-      <RiderNavBar />
       <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.searchcontainerform}>
@@ -261,7 +243,8 @@ const RiderFinder = () => {
                     seats={seats}
                     origin={originRef.current.value}
                     destination={destinationRef.current.value}
-                    riderID={parsedData?.userName}
+                    riderID={parsedData?.id}
+                    token={parsedData.token}
                   />
                 </ModalComponent>
               )}

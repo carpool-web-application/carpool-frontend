@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styles from "./RiderHome.module.css";
 import * as firebase from "../../Config/firebase-config.js";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import RiderNavBar from "../../Navbar/rider/navBarComponent-rider.js";
 import ProfilePicture from "./Component/ProfilePicture.js";
 import { useSelector } from "react-redux";
 import ProfileDetails from "../Rider/Component/ProfileDetails.js";
@@ -12,7 +11,7 @@ import Loader from "../../loaderComponent/Loader.js";
 const RiderHome = () => {
   /*    const storedData = localStorage.getItem('rider');
   const driverData = JSON.parse(storedData); */
-  const driverData = useSelector((state) => state.rider.rider);
+  const driverData = useSelector((state) => state.user.userData);
   const driverId = driverData.userId;
   const [profileData, setProfileData] = useState([]);
   const [rating, setRating] = useState(0);
@@ -97,8 +96,6 @@ const RiderHome = () => {
 
   return (
     <div className={styles.riderHomeMainPage}>
-      <RiderNavBar />
-
       {load ? (
         <div
           style={{

@@ -8,17 +8,14 @@ const Driverapproval = () => {
   /*   const storedData = localStorage.getItem('driver');
   const driverData? = JSON.parse(storedData); */
   const driverData = useSelector((state) => state.user.userData);
-  const driverId = driverData?.userId;
+  const driverId = driverData?.id;
   const [rideRequest, setRideRequest] = useState([]);
   const [driverOrders, setDriverOrders] = useState([]);
   const [error, setError] = useState("");
 
-  useEffect(() => {}, []);
-
-  const fetchInitialData = async () => {
+  useEffect(() => {
     showRequestedRide();
-    showDriverOrderInformation();
-  };
+  }, []);
 
   const showRequestedRide = async () => {
     try {
@@ -37,7 +34,7 @@ const Driverapproval = () => {
     }
   };
 
-  const showDriverOrderInformation = async () => {
+  /* const showDriverOrderInformation = async () => {
     try {
       const response = await fetch(
         `http://localhost:9000/riderOrders/${driverId}`
@@ -82,7 +79,7 @@ const Driverapproval = () => {
     } catch (error) {
       setError("Failed to fetch profile data");
     }
-  };
+  }; */
 
   const removeRequest = async (requestId, body) => {
     try {
@@ -92,8 +89,6 @@ const Driverapproval = () => {
         // Handle error if the response is not OK, e.g., throw an error or set an error state
         throw new Error("Failed to reject ride");
       }
-
-      const response = await responseData.json();
 
       // Update the state by filtering out the request with the specified requestId
       setRideRequest((prevRequests) => {
@@ -107,23 +102,23 @@ const Driverapproval = () => {
     }
   };
 
-  const data =
-    Array.isArray(rideRequest) &&
-    rideRequest.map((c) => (
-      <RideRequestItems
-        key={c._id}
-        userName={c.RiderId}
-        removeRequest={removeRequest}
-        setDriverOrders={driverOrders}
-        riderseats={c.Riderseats}
-        avaialableseats={driverOrders.Availableseats}
-        //passing the function remove Reminder to the reminde items
-      />
-    ));
-
   return (
     <div className={styles.approvalMain}>
-      <div className="data-area">{data}</div>
+      <div className="data-area">
+        {rideRequest.length > 0
+          ? rideRequest.map((c) => (
+              <RideRequestItems
+                key={c._id}
+                userName={c.driver.UserId}
+                removeRequest={removeRequest}
+                setDriverOrders={driverOrders}
+                riderseats={c.Riderseats}
+                avaialableseats={driverOrders.Availableseats}
+                //passing the function remove Reminder to the reminde items
+              />
+            ))
+          : ""}
+      </div>
     </div>
   );
 };

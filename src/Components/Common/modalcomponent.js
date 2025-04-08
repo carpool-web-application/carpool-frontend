@@ -1,12 +1,14 @@
+import styles from "./ModalComponent.module.css";
+
 const ModalComponent = ({ toggleModal, children }) => {
   const toggle = (event) => {
     event.preventDefault();
     toggleModal();
   };
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <span className="close" onClick={toggle}>
+    <div className={styles.modal}>
+      <div className={styles.modalContent}>
+        <span className={styles.close} onClick={toggle}>
           X
         </span>
         {children}
