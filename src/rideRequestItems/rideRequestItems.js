@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import "../rideRequestItems/rideRequestItems.css";
 
 const RideRequestitems = (props) => {
-  console.log(props.userName);
   //Using usestate to assign classes based on the click of the reminder name to expand reduce the size of the remidner. It also strikes the reminder if it complete
   const handleAcceptRider = async () => {
     if (props.avaialableseats > props.riderseats) {

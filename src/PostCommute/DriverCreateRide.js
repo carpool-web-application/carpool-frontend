@@ -8,7 +8,6 @@ import SubmitButton from "../Components/Common/SubmitButton.js";
 const libraries = ["places"];
 const DriverRide = () => {
   const parsedData = useSelector((state) => state.user.userData);
-  console.log(parsedData);
   const navigate = useNavigate();
   const [data, setData] = useState({
     DriverOrderNumber: "",
@@ -51,20 +50,27 @@ const DriverRide = () => {
   }, []);
 
   const fetchData = async () => {
-    /*    try { */
-    const existingRecord = await fetchOngoingRide(
-      parsedData.id,
-      parsedData.token
-    );
-    if (!existingRecord.ok) {
-      setShowButton(true);
-    } else {
+    try {
+      const existingRecord = await fetchOngoingRide(
+        parsedData.id,
+        parsedData.token
+      );
+      const reponse = await existingRecord.json();
+      // Check if the response is null or undefined
+      if (reponse == null) {
+        // This checks for both null and undefined
+        setShowButton(true);
+        setError("No ongoing ride found."); // More specific error message
+        setErrorFlag(false);
+      } else {
+        setShowButton(false);
+      }
+    } catch (error) {
+      console.error(error); // Log the error to the console
       setError("Failed to fetch profile data");
       setErrorFlag(true);
+      setShowButton(false); // Ensure button is hidden on error
     }
-    /*   } catch (error) {
- setError('Failed to fetch profile data');
-} */
   };
 
   /** @type React.MutableRefObject<HTMLInputElement>*/
@@ -117,13 +123,16 @@ const DriverRide = () => {
         Availableseats: seats,
       };
       const responseData = await createRide(ridePayload, parsedData.token);
-      console.log(responseData);
       if (!responseData.ok) {
         setError("Failed to create the Post");
         setErrorFlag(true);
         console.error("Failed to create the Post");
       }
-      const response = responseData.json();
+      setShowButton(false);
+      originRef.current.value = "";
+      setSeats(0);
+      setCost(0);
+      destinationRef.current.value = "";
     } catch (error) {
       console.error(error);
     }

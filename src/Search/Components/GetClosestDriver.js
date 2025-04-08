@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./GetClosestDriver.css";
 import PaymentComp from "../../Payment/payment";
 import { useNavigate } from "react-router-dom";
+import { findRider, requestRide } from "../../Utils/ride";
 //import ClosestCustomer from "./closestCustomer";
 
 // Function to calculate the Haversine distance between two points
@@ -35,24 +36,15 @@ const GetClosestDriver = (props) => {
     userEndLon
   ) => {
     try {
-      const response = await fetch("http://localhost:9000/riderOrders/"); // Replace with actual API endpoint to fetch drivers
+      const response = await findRider(props.token); // Replace with actual API endpoint to fetch drivers
       if (!response.ok) {
         throw new Error("Failed to fetch drivers");
       }
       const drivers = await response.json();
-
-      ////console.log(drivers);
-      //const filteredDrivers = drivers;
-      const filteredDrivers = drivers.filter(
-        (item) =>
-          item.DriverPostStatus == "Open" && // Change column1 to the desired column for filtering
-          item.Availableseats > 0 &&
-          item.Availableseats > props.seats // Change column5 to the desired column for filtering
-      );
       //const closestdriver = getClosestDriver(userStartLat, userStartLon, userEndLat, userEndLon, drivers);
       let ClosestDriver = null;
       let minDistance = 5; // Initialize with a very large value
-      filteredDrivers.forEach((driver) => {
+      drivers.forEach((driver) => {
         // Extract driver and user location coordinates from their addresses
         const startDistance = haversine(
           userStartLat,
@@ -67,9 +59,6 @@ const GetClosestDriver = (props) => {
           driver.DestinationLongitude
         );
         const totalDistance = startDistance + endDistance;
-        //console.log(startDistance);
-        console.log("booelen" + totalDistance);
-        console.log(totalDistance < minDistance);
         if (totalDistance < minDistance) {
           minDistance = totalDistance;
           ClosestDriver = driver;
@@ -133,87 +122,32 @@ const GetClosestDriver = (props) => {
   }
 
   const handlesendRequsttoDriver = async () => {
-    //setPaymentComp(true);
-    navigate("/riderHome");
-    alert("Request Sent!");
-    const newOrderNumber = Math.floor(Math.random() * 1000000000).toString();
-    const existingRecord = await fetch(
-      `http://localhost:9000/rideRequest/${props.riderID}`
-    );
-    const existingRecordData = await existingRecord.json();
-    // Filter the results based on the username field
-    if (!existingRecordData) {
-      //console.error('existingRecordData is null or undefined');
-      try {
-        const response = await fetch(`http://localhost:9000/rideRequest/`, {
-          //fetch api with the call back function
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            riderOrderNumber: newOrderNumber,
-            DriverOrderNumber: closestDriver.DriverOrderNumber,
-            DriverId: closestDriver.DriverId,
-            RiderId: props.riderID,
-            OriginLatitude: props.startLat,
-            OriginLongitude: props.startLon,
-            DestinationLatitude: props.endLat,
-            DestinationLongitude: props.endLon,
-            Riderseats: props.seats,
-            StartingLocation: props.origin,
-            Destination: props.destination,
-            Cost:
-              (closestDriver.Cost / closestDriver.driverseats) * props.seats,
-            CommuteStatus: "Requested",
-          }),
-        });
-        const responsedata = await response.json();
-        ////console.log(responsedata);
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
-      if (existingRecordData.length > 0) {
-        const recordExists = existingRecordData.filter(
-          (record) =>
-            record.CommuterStatus == "Requested" &&
-            record.DriverOrderNumber == closestDriver.DriverOrderNumber
-        );
-        if (recordExists.length > 0) {
-          alert("You have already requested");
-          return;
-        } else {
-          try {
-            const response = await fetch(
-              `http://localhost:9000/rideRequest/${props.riderID}`,
-              {
-                //fetch api with the call back function
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  riderOrderNumber: newOrderNumber,
-                  DriverOrderNumber: closestDriver.DriverOrderNumber,
-                  DriverId: closestDriver.DriverId,
-                  RiderId: props.riderID,
-                  OriginLatitude: props.startLat,
-                  OriginLongitude: props.startLon,
-                  DestinationLatitude: props.endLat,
-                  DestinationLongitude: props.endLon,
-                  Riderseats: props.seats,
-                  Cost:
-                    (closestDriver.Cost / closestDriver.driverseats) *
-                    props.seats,
-                  CommuteStatus: "Requested",
-                }),
-              }
-            );
-            const responsedata = await response.json();
-            ////console.log(responsedata);
-          } catch (error) {
-            console.error(error);
-          }
-        }
-      }
-      /* else if (existingRecordData.CommuterStatus == 'Requested' && existingRecordData.DriverOrderNumber == closestDriver.DriverOrderNumber){
+    try {
+      const response = await requestRide(
+        {
+          DriverOrderNumber: closestDriver.DriverOrderNumber,
+          driver: closestDriver.DriverId,
+          rider: props.riderID,
+          OriginLatitude: props.startLat,
+          OriginLongitude: props.startLon,
+          DestinationLatitude: props.endLat,
+          DestinationLongitude: props.endLon,
+          Riderseats: props.seats,
+          Cost: (closestDriver.Cost / closestDriver.driverseats) * props.seats,
+          CommuteStatus: "Requested",
+        },
+        props.token
+      );
+      const responsedata = await response.json();
+      ////console.log(responsedata);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      navigate("/riderHome");
+      alert("Request Sent!");
+    }
+  };
+  /* else if (existingRecordData.CommuterStatus == 'Requested' && existingRecordData.DriverOrderNumber == closestDriver.DriverOrderNumber){
 
       }
     //console.log(recordExists)
@@ -246,19 +180,19 @@ const GetClosestDriver = (props) => {
         console.error(error);
       }
     } */
-    }
-  };
+
   return (
     <div className="main_driver">
       {closestDriver ? (
         <div className="driver-det">
           <details>
             <summary>Driver Found!</summary>
-            <p>Closest Driver Available : {closestDriver.DriverId}</p>
-            <p> Driver Order Number : {closestDriver.DriverOrderNumber}</p>
+            <p>Closest Driver Available : {closestDriver.driver}</p>
+            <p> Driver Order Number : {closestDriver.rideId}</p>
             <p>
               Total Cost : ${" "}
-              {(closestDriver.Cost / closestDriver.driverseats) * props.seats}
+              {(closestDriver.Cost / closestDriver.Availableseats) *
+                props.seats}
             </p>
             <div>
               <button

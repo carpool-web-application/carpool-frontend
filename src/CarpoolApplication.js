@@ -80,109 +80,115 @@ const CarpoolApplication = () => {
   return (
     <>
       <Router>
-        {isAuthenticated && (
-          <Layout userType={userData?.commuterType} userData={userData}>
-            <Routes>
-              <Route
-                path="/createRide"
-                element={
-                  isAuthenticated ? (
-                    <ProtectedRoutes allowedRoles={"Driver"}>
-                      <DriverComp />
-                    </ProtectedRoutes>
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route
-                path="/searchRide"
-                element={
-                  isAuthenticated ? <Search /> : <Navigate to="/login" />
-                }
-              />
-              <Route
-                path="/driverHome"
-                element={
-                  isAuthenticated ? (
-                    <ProtectedRoutes allowedRoles={"Driver"}>
-                      <DriverHome />
-                    </ProtectedRoutes>
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route
-                path="/pastRide"
-                element={
-                  isAuthenticated ? <RideHistory /> : <Navigate to="/login" />
-                }
-              />
-
-              <Route
-                path="/riderHome"
-                element={
-                  isAuthenticated ? (
-                    <ProtectedRoutes allowedRoles={"Rider"}>
-                      <RiderHome />
-                    </ProtectedRoutes>
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route
-                path="/driverApproval"
-                element={
-                  isAuthenticated ? (
-                    <ProtectedRoutes allowedRoles={"Driver"}>
-                      <DriverApproval />
-                    </ProtectedRoutes>
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route
-                path="/pastRides"
-                element={
-                  isAuthenticated ? (
-                    <ProtectedRoutes allowedRoles={"Driver"}>
-                      <DriverPastRides />
-                    </ProtectedRoutes>
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route
-                path="/riderpastRides"
-                element={
-                  isAuthenticated ? (
-                    <ProtectedRoutes allowedRoles={"Rider"}>
-                      <RiderPastRides />
-                    </ProtectedRoutes>
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                }
-              />
-              <Route
-                path="/login"
-                element={<Login setTimer={handleRelogin} />}
-              />
-            </Routes>
-          </Layout>
-        )}
         <Routes>
           <Route path="/homePage" element={<Home />} />
           <Route path="/login" element={<Login setTimer={handleRelogin} />} />
-          <Route path="/about" element={<AboutPage />} />
+          {/*  <Route path="/about" element={<AboutPage />} /> */}
           <Route path="/payment" element={<Payment />} />
           <Route path="/" element={<Home />} />
           <Route path="/createProfile" element={<CreateProfile />} />
         </Routes>
+        <Layout userType={userData?.commuterType} userData={userData}>
+          <Routes>
+            <Route
+              path="/createRide"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <DriverComp />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/searchRide"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Rider"}>
+                    <Search />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/driverHome"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <DriverHome />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/pastRide"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <RideHistory />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+
+            <Route
+              path="/riderHome"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Rider"}>
+                    <RiderHome />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/driverApproval"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <DriverApproval />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/pastRides"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <DriverPastRides />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/riderpastRides"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Rider"}>
+                    <RiderPastRides />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+          </Routes>
+        </Layout>
       </Router>
     </>
   );

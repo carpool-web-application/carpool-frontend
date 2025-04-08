@@ -15,7 +15,7 @@ const Main = styled.main`
 `;
 const RiderMyTrips = () => {
   /* const storedData = localStorage.getItem('rider'); */
-  const driverData = useSelector((state) => state.rider.rider);
+  const driverData = useSelector((state) => state.user.userData);
   const driverId = driverData?.userName;
   const [riderOrders, setRiderOrders] = useState([]);
   const [rating, setsetRating] = useState(0);
