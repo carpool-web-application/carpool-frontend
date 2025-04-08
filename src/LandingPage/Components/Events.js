@@ -19,7 +19,7 @@ const eventData = [
 
 const Events = () => {
   return (
-    <div className={styles.eventsContainer}>
+    <div className={styles.eventsContainer} id="Events">
       <div className={styles.title}>Upcoming Events</div>
       <div className={styles.detailsContainer}>
         {eventData.map((event, index) => (

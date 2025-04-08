@@ -20,7 +20,7 @@ const Suggestions = (props) => {
   ];
 
   return (
-    <div className={styles.suggestionContainer}>
+    <div className={styles.suggestionContainer} id="suggestions">
       <div className={styles.title}>Suggestions</div>
       <div className={styles.suggestionDetailsContainer}>
         {suggestionsData.map((suggestion, index) => (

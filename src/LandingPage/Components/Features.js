@@ -21,7 +21,7 @@ const featuresData = [
 
 const Features = () => {
   return (
-    <div className={styles.featuresContainer}>
+    <div className={styles.featuresContainer} id="Features">
       <div className={styles.title}>Key Features</div>
       <div className={styles.detailsContainer}>
         {featuresData.map((feature, index) => (
