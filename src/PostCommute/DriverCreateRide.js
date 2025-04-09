@@ -56,9 +56,8 @@ const DriverRide = () => {
         parsedData.token
       );
       const reponse = await existingRecord.json();
-      console.log("fetched ride", reponse);
       // Check if the response is null or undefined
-      if (reponse == null) {
+      if (reponse.length === 0) {
         // This checks for both null and undefined
         setShowButton(true);
         setError("No ongoing ride found."); // More specific error message

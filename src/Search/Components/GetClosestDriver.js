@@ -22,7 +22,7 @@ function haversine(lat1, lon1, lat2, lon2) {
 const GetClosestDriver = (props) => {
   const navigate = useNavigate();
   //console.log(props.origin)
-  const [closestDriver, setClosestDriver] = useState("");
+  const [closestDriver, setClosestDriver] = useState({});
   const [paymentComp, setPaymentComp] = useState("");
 
   useEffect(() => {
@@ -40,11 +40,14 @@ const GetClosestDriver = (props) => {
       if (!response.ok) {
         throw new Error("Failed to fetch drivers");
       }
+
       const drivers = await response.json();
+      console.log("drivers", drivers);
       //const closestdriver = getClosestDriver(userStartLat, userStartLon, userEndLat, userEndLon, drivers);
       let ClosestDriver = null;
       let minDistance = 5; // Initialize with a very large value
       drivers.forEach((driver) => {
+        console.log("data", driver);
         // Extract driver and user location coordinates from their addresses
         const startDistance = haversine(
           userStartLat,
@@ -120,7 +123,7 @@ const GetClosestDriver = (props) => {
     try {
       const response = await requestRide(
         {
-          driver: closestDriver.driver,
+          driver: closestDriver.driver._id,
           rider: props.riderID,
           OriginLatitude: props.startLat,
           OriginLongitude: props.startLon,
@@ -186,7 +189,7 @@ const GetClosestDriver = (props) => {
         <div className="driver-det">
           <details>
             <summary>Driver Found!</summary>
-            <p>Closest Driver Available : {closestDriver.driver}</p>
+            <p>Closest Driver Available : {closestDriver.driver?.userName}</p>
             <p> Driver Order Number : {closestDriver.rideId}</p>
             <p>
               Total Cost : ${" "}
