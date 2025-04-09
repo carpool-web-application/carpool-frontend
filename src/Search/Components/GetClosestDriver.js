@@ -116,25 +116,24 @@ const GetClosestDriver = (props) => {
     return ClosestDriver;
   };
 
-  function showPopup() {
-    window.open("/payment", "Payment Popup", "width=500,height=500");
-    return false;
-  }
-
   const handlesendRequsttoDriver = async () => {
     try {
       const response = await requestRide(
         {
-          DriverOrderNumber: closestDriver.DriverOrderNumber,
-          driver: closestDriver.DriverId,
+          driver: closestDriver.driver,
           rider: props.riderID,
           OriginLatitude: props.startLat,
           OriginLongitude: props.startLon,
           DestinationLatitude: props.endLat,
           DestinationLongitude: props.endLon,
           Riderseats: props.seats,
-          Cost: (closestDriver.Cost / closestDriver.driverseats) * props.seats,
-          CommuteStatus: "Requested",
+          StartingLocation: props.origin,
+          Destination: props.destination,
+          PickUpTime: props.PickUpTime,
+          seatsRequested: props.seats,
+          ride: closestDriver._id,
+          Cost:
+            (closestDriver.Cost / closestDriver.Availableseats) * props.seats,
         },
         props.token
       );
@@ -180,10 +179,10 @@ const GetClosestDriver = (props) => {
         console.error(error);
       }
     } */
-
+  console.log("drivers data", closestDriver);
   return (
     <div className="main_driver">
-      {closestDriver ? (
+      {closestDriver !== null ? (
         <div className="driver-det">
           <details>
             <summary>Driver Found!</summary>
@@ -206,19 +205,14 @@ const GetClosestDriver = (props) => {
           </details>
         </div>
       ) : (
-        <div className="search-alert">
-          <div className="alert">
-            <span className="closebtn">&times;</span>
-            <strong>
+        <div className="driver-det">
+          <details>
+            <summary>Driver Not Found!</summary>
+            <p>
               Sorry! No drivers heading your ride Destination. Please try again
               later OR change the Destination.
-            </strong>
-
-            {/*JUST FOR WOKRING ..DELETE LATER */}
-          </div>
-          <div className="PAYMENT">
-            <PaymentComp />
-          </div>
+            </p>
+          </details>
         </div>
       )}
       {/* <ClosestCustomer/> */}

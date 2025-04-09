@@ -28,7 +28,7 @@ const RiderFinder = () => {
   const [diplayDrivers, setDisplayDrivers] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [showPayment, setshowPayment] = useState(false);
-  const [showButton, setShowButton] = useState(false);
+  const [showButton, setShowButton] = useState(true);
   const [costPerSeat, setCostPerSeat] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const RiderFinder = () => {
     navigate("/login");
   }
 
-  useEffect(() => {
+  /*  useEffect(() => {
     async function fetchData() {
       const existingRecord = await riderRequest(
         parsedData?.id,
@@ -73,7 +73,7 @@ const RiderFinder = () => {
     }
 
     fetchData();
-  }, [showButton, showPayment, parsedData?.token, parsedData?.userId]);
+  }, [showButton, showPayment, parsedData?.token, parsedData?.userId]); */
 
   const originRef = useRef();
   const destinationRef = useRef();
@@ -245,6 +245,7 @@ const RiderFinder = () => {
                     destination={destinationRef.current.value}
                     riderID={parsedData?.id}
                     token={parsedData.token}
+                    PickUpTime={pickUpTime}
                   />
                 </ModalComponent>
               )}

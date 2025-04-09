@@ -56,6 +56,7 @@ const DriverRide = () => {
         parsedData.token
       );
       const reponse = await existingRecord.json();
+      console.log("fetched ride", reponse);
       // Check if the response is null or undefined
       if (reponse == null) {
         // This checks for both null and undefined
@@ -73,9 +74,7 @@ const DriverRide = () => {
     }
   };
 
-  /** @type React.MutableRefObject<HTMLInputElement>*/
   const originRef = useRef();
-  /** @type React.MutableRefObject<HTMLInputElement>*/
   const destinationRef = useRef();
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API,
