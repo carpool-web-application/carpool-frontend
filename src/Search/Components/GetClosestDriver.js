@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./GetClosestDriver.css";
 import PaymentComp from "../../Payment/payment";
 import { useNavigate } from "react-router-dom";
-import { findRider, requestRide } from "../../Utils/ride";
+import { findRider } from "../../Utils/ride";
+import { requestRide } from "../../Utils/rideRequest";
 //import ClosestCustomer from "./closestCustomer";
 
 // Function to calculate the Haversine distance between two points
