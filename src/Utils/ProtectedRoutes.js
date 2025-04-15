@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 export const ProtectedRoutes = ({ children, allowedRoles }) => {
   const { userData } = useSelector((state) => state.user);
-  console.log(userData);
   const location = useLocation();
   const checkAuthentication = () => {
     // Assuming you want to handle different roles differently or extend the logic

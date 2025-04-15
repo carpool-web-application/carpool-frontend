@@ -1,111 +1,54 @@
-const apiUrl = process.env.REACT_APP_BACKEND_URL;
+import { fetchAction } from "./fetchUtil";
 
 export const fetchOngoingRide = async (userId, token) => {
-  const getRide = await fetch(
-    `${apiUrl}/carpool/v1/rides?driverId=${userId}&status=available`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-      },
-    }
+  return await fetchAction(
+    "GET",
+    token,
+    null,
+    `/carpool/v1/rides?driverId=${userId}&status=available`
   );
-
-  return getRide;
 };
 
 export const fetchRide = async (userId, token) => {
-  const getRide = await fetch(`${apiUrl}/carpool/v1/rides?driver=${userId}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-    },
-  });
-
-  return getRide;
+  return await fetchAction(
+    "GET",
+    token,
+    null,
+    `/carpool/v1/rides?driver=${userId}`
+  );
 };
 
 export const createRide = async (body, token) => {
-  const postRide = await fetch(`${apiUrl}/carpool/v1/rides/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-    },
-    body: JSON.stringify(body),
-  });
-
-  return postRide;
+  return await fetchAction("POST", token, body, `/carpool/v1/rides/`);
 };
 
 export const updateStatus = async (userId, body, token) => {
-  const updateRide = await fetch(`${apiUrl}/carpool/v1/rides/${userId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-    },
-    body: JSON.stringify(body),
-  });
-
-  return updateRide;
+  return await fetchAction("PUT", token, body, `/carpool/v1/rides/${userId}`);
 };
 
 export const fetchRequestedRide = async (userId, token) => {
-  console.log(userId);
-  const fetchRequestedRide = await fetch(
-    `${apiUrl}/carpool/v1/rideRequest?driver=${userId}&CommuteStatus=pending`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-      },
-    }
+  return await fetchAction(
+    "GET",
+    token,
+    null,
+    `/carpool/v1/rideRequest?driver=${userId}&CommuteStatus=pending`
   );
-
-  return fetchRequestedRide;
 };
 
 export const rejectRide = async (requestId, body, token) => {
-  const rejectRide = await fetch(
-    `${apiUrl}/carpool/v1/rideRequest/request/${requestId}`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-      },
-      body: JSON.stringify(body),
-    }
+  return await fetchAction(
+    "PATCH",
+    token,
+    body,
+    `/carpool/v1/rideRequest/request/${requestId}`
   );
-
-  return rejectRide;
 };
 
 export const findRider = async (token) => {
-  const findRider = await fetch(`${apiUrl}/carpool/v1/rides?status=available`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-    },
-  });
-
-  return findRider;
-};
-
-export const requestRide = async (body, token) => {
-  const requestRide = await fetch(`${apiUrl}/carpool/v1/rideRequest/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-    },
-    body: JSON.stringify(body),
-  });
-
-  return requestRide;
+  return await fetchAction(
+    "GET",
+    token,
+    null,
+    "/carpool/v1/rides?status=available"
+  );
 };
