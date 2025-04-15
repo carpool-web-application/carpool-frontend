@@ -195,6 +195,110 @@ const CarpoolApplication = () => {
             }
           />
         </Routes>
+        {/*         <Layout userType={userData?.commuterType} userData={userData}>
+          <Routes>
+            <Route
+              path="/createRide"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <DriverComp />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/searchRide"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Rider"}>
+                    <Search />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/driverHome"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <DriverHome />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/pastRide"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <RideHistory />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+
+            <Route
+              path="/riderHome"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Rider"}>
+                    <RiderHome />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/driverApproval"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <DriverApproval />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/pastRides"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Driver"}>
+                    <DriverPastRides />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+            <Route
+              path="/riderpastRides"
+              element={
+                isAuthenticated ? (
+                  <ProtectedRoutes allowedRoles={"Rider"}>
+                    <RiderPastRides />
+                  </ProtectedRoutes>
+                ) : (
+                  <Navigate to="/login" />
+                )
+              }
+            />
+          </Routes>
+        </Layout> */}
+        {/* removed the abnove code as routes cannot hjave anything apart from route as a child it cannot have
+         layout so layout has to be parent and routes child and then the route 
+         also fixed showing unwanted routes */}
       </Router>
     </>
   );
