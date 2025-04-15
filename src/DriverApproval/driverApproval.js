@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import RideRequestItems from "../rideRequestItems/rideRequestItems.js";
 import { fetchRequestedRide, rejectRide } from "../Utils/ride.js";
 import styles from "./DriverApproval.module.css";
 
 const Driverapproval = () => {
-  /*   const storedData = localStorage.getItem('driver');
-  const driverData? = JSON.parse(storedData); */
   const driverData = useSelector((state) => state.user.userData);
   const driverId = driverData?.id;
+
   const [rideRequest, setRideRequest] = useState([]);
-  const [driverOrders, setDriverOrders] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -23,101 +20,73 @@ const Driverapproval = () => {
         driverId,
         driverData?.token
       );
-
-      if (!responseData.ok) {
-      }
+      if (!responseData.ok) throw new Error("Fetch failed");
 
       const response = await responseData.json();
       setRideRequest(response);
     } catch (error) {
-      setError("Failed to fetch profile data");
+      console.error("Failed to fetch ride requests:", error);
+      setError("Failed to fetch ride requests");
     }
   };
-
-  /* const showDriverOrderInformation = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:9000/riderOrders/${driverId}`
-      );
-      if (response.ok) {
-        const orderdata = await response.json();
-        // console.log(data)
-        if (Array.isArray(orderdata)) {
-          const filteredDriverOrder = orderdata.filter(
-            (item) =>
-              item.DriverPostStatus === "Open" && item.DriverId === driverId // Change column5 to the desired column for filtering
-          );
-          if (filteredDriverOrder.Availableseats == 0) {
-            fetch(`http://localhost:9000/riderOrders/${driverId}`, {
-              method: "PUT",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ DriverPostStatus: "Closed" }), // set the new status based on the checkbox value
-            })
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Failed to update reminder status");
-                }
-                // update the checkbox state in the component's state
-                //setCheckBox(checked);
-              })
-              .catch((error) => {
-                console.error(error);
-                // handle the error
-              });
-          } else {
-            setDriverOrders(filteredDriverOrder);
-          }
-        } else if (
-          orderdata.DriverPostStatus === "Open" &&
-          orderdata.DriverId === driverId
-        ) {
-          setDriverOrders(orderdata);
-        }
-      } else {
-        setError("Failed to fetch profile data");
-      }
-    } catch (error) {
-      setError("Failed to fetch profile data");
-    }
-  }; */
 
   const removeRequest = async (requestId, body) => {
     try {
       const responseData = await rejectRide(requestId, body, driverData?.token);
+      if (!responseData.ok) throw new Error("Failed to reject ride");
 
-      if (!responseData.ok) {
-        // Handle error if the response is not OK, e.g., throw an error or set an error state
-        throw new Error("Failed to reject ride");
-      }
-
-      // Update the state by filtering out the request with the specified requestId
-      setRideRequest((prevRequests) => {
-        return prevRequests.filter(
-          (prevRequest) => prevRequest.requestId !== requestId
-        );
-      });
+      setRideRequest((prevRequests) =>
+        prevRequests.filter((req) => req.requestId !== requestId)
+      );
     } catch (error) {
       console.error("Error rejecting ride:", error);
-      // Optionally update state to reflect the error
     }
   };
 
   return (
     <div className={styles.approvalMain}>
-      <div className="data-area">
-        {rideRequest.length > 0
-          ? rideRequest.map((c) => (
-              <RideRequestItems
-                key={c._id}
-                userName={c.driver.UserId}
-                removeRequest={removeRequest}
-                setDriverOrders={driverOrders}
-                riderseats={c.Riderseats}
-                avaialableseats={driverOrders.Availableseats}
-                //passing the function remove Reminder to the reminde items
-              />
+      <div className={styles.title}>
+        <span>Incoming Ride Requests</span>
+      </div>
+      <div className={styles.cardContainer}>
+        <div className={styles.rideGrid}>
+          {rideRequest.length > 0 ? (
+            rideRequest.map((c) => (
+              <div className={styles.card} key={c._id}>
+                <div className={styles.cardContent}>
+                  <div>
+                    <strong>Destination:</strong> {c.destination}
+                  </div>
+                  <div>
+                    <strong>Time:</strong> {new Date(c.time).toLocaleString()}
+                  </div>
+                  <div>
+                    <strong>Cost:</strong> ${c.cost}
+                  </div>
+                  <div>
+                    <strong>User:</strong> {c.driver?.UserId}
+                  </div>
+                </div>
+                <div className={styles.buttonGroup}>
+                  <button
+                    className={`${styles.btn} ${styles.accept}`}
+                    onClick={() => console.log("Accept clicked")}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    className={`${styles.btn} ${styles.reject}`}
+                    onClick={() => removeRequest(c.requestId, {})}
+                  >
+                    Reject
+                  </button>
+                </div>
+              </div>
             ))
-          : ""}
+          ) : (
+            <p>No ride requests at the moment.</p>
+          )}
+        </div>
       </div>
     </div>
   );
