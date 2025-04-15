@@ -11,7 +11,9 @@ import { removeAuth, storeAuth } from "./Slice/authSlice.js";
 import { ProtectedRoutes } from "./Utils/ProtectedRoutes.js";
 const Layout = React.lazy(() => import("./Components/Common/Layout.js"));
 const Search = React.lazy(() => import("./Search/search.js"));
-
+const ResetPassword = React.lazy(() =>
+  import("./ResetPassword/ResetPassword.js")
+);
 const CreateProfile = React.lazy(() => import("./User/UserProfileCreation.js"));
 const DriverComp = React.lazy(() =>
   import("./PostCommute/DriverCreateRide.js")
@@ -87,6 +89,7 @@ const CarpoolApplication = () => {
           <Route path="/payment" element={<Payment />} />
           <Route path="/" element={<Home />} />
           <Route path="/createProfile" element={<CreateProfile />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
         </Routes>
         <Layout userType={userData?.commuterType} userData={userData}>
           <Routes>
