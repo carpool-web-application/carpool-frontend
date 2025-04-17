@@ -68,20 +68,13 @@ const Login = ({ setTimer }) => {
     /*     setExpiryTime(Date.now() + 3600000);
     setIsAuthenticated(true);
     setTimer(); */
-    if (existingRecordData.commuterType === "Rider") {
-      //setRiderLoginButton(true);
-      navigate("/searchRide");
-      return;
-    } else if (existingRecordData.commuterType === "Driver") {
-      //setDriverLoginButton(true);
-      navigate("/createRide");
-      return;
-    } else {
-      <div className="alert">
-        <span className="closebtn">&times;</span>
-        <strong>OOps! Authentication Issues Suspected. </strong>
-      </div>;
-    }
+    setTimeout(() => {
+      if (existingRecordData.commuterType === "Rider") {
+        navigate("/searchRide");
+      } else if (existingRecordData.commuterType === "Driver") {
+        navigate("/createRide");
+      }
+    }, 100);
   };
 
   const togglePasswordType = (e) => {

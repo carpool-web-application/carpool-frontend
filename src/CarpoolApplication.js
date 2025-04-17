@@ -101,7 +101,7 @@ const CarpoolApplication = () => {
             }
           >
             <Route
-              path="createRide"
+              path="/createRide"
               element={
                 isAuthenticated ? (
                   <ProtectedRoutes allowedRoles={"Driver"}>
@@ -113,15 +113,11 @@ const CarpoolApplication = () => {
               }
             />
             <Route
-              path="searchRide"
+              path="/searchRide"
               element={
-                isAuthenticated ? (
-                  <ProtectedRoutes allowedRoles={"Rider"}>
-                    <Search />
-                  </ProtectedRoutes>
-                ) : (
-                  <Navigate to="/login" />
-                )
+                <ProtectedRoutes allowedRoles={"Rider"}>
+                  <Search />
+                </ProtectedRoutes>
               }
             />
             <Route
