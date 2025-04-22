@@ -142,115 +142,117 @@ const ProfileCreation = () => {
     <div className={styles.registerParentContainer}>
       <div className={styles.registerContainer}>
         <form className={styles.signUpForm}>
-          <div className={styles.inputLabelContainer}>
-            <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              autoFocus={true}
-              required={true}
-              placeholder="Email"
-            />
-            <label>Email Address</label>
+          <div className={styles.inputDiv}>
+            <div className={styles.inputLabelContainer}>
+              <input
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                autoFocus={true}
+                required={true}
+                placeholder="Email"
+              />
+              <label>Email Address</label>
+            </div>
+            <div className={styles.inputLabelContainer}>
+              <input
+                type="text"
+                value={username}
+                onChange={handleUsernameChange}
+                autoFocus={true}
+                required={true}
+                placeholder="Username"
+              />
+              <label>User Name</label>
+            </div>
+            <div className={styles.inputLabelContainer}>
+              <input
+                type="text"
+                value={name}
+                onChange={handleNameChange}
+                autoFocus={true}
+                required={true}
+                placeholder="name"
+              />
+              <label>Name</label>
+            </div>
+            <div className={styles.inputLabelContainer}>
+              <input
+                required={true}
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="Password"
+              />
+              <label>Password</label>
+            </div>
+            <div className={styles.inputLabelContainer}>
+              <input
+                required={true}
+                type="text"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+                placeholder="Phone Number"
+              />
+              <label>Phone Number</label>
+            </div>
+            {showDriverInput ? (
+              <>
+                <div className={styles.inputLabelContainer}>
+                  <input
+                    required={true}
+                    type="text"
+                    value={licenseNumber}
+                    onChange={handleLicenseNumberChange}
+                    placeholder="License Number"
+                  />
+                  <label>License Number</label>
+                </div>
+                <div className={styles.inputLabelContainer}>
+                  <input
+                    required={true}
+                    type="text"
+                    value={vehcileMake}
+                    onChange={handleVehcileMakeChange}
+                    placeholder="Vehicle Make"
+                  />
+                  <label>Vehicle Make</label>
+                </div>
+                <div className={styles.inputLabelContainer}>
+                  <input
+                    required={true}
+                    type="text"
+                    value={vehcileModel}
+                    onChange={handleVehcileModelChange}
+                    placeholder="Vehicle Model"
+                  />
+                  <label>Vehicle Model</label>
+                </div>
+                <div className={styles.inputLabelContainer}>
+                  <input
+                    required={true}
+                    type="text"
+                    value={vehcileYear}
+                    onChange={handleVehcileyearChange}
+                    placeholder="Vehicle year"
+                  />
+                  <label>Vehicle year</label>
+                </div>
+                <div className={styles.inputLabelContainer}>
+                  <input
+                    required={true}
+                    type="text"
+                    value={vehcilePlate}
+                    onChange={handleVehcilePlateNumberChange}
+                    placeholder="Vehicle Plate Number"
+                  />
+                  <label>Vehicle Plate Number</label>
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
-          <div className={styles.inputLabelContainer}>
-            <input
-              type="text"
-              value={username}
-              onChange={handleUsernameChange}
-              autoFocus={true}
-              required={true}
-              placeholder="Username"
-            />
-            <label>User Name</label>
-          </div>
-          <div className={styles.inputLabelContainer}>
-            <input
-              type="text"
-              value={name}
-              onChange={handleNameChange}
-              autoFocus={true}
-              required={true}
-              placeholder="name"
-            />
-            <label>Name</label>
-          </div>
-          <div className={styles.inputLabelContainer}>
-            <input
-              required={true}
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              placeholder="Password"
-            />
-            <label>Password</label>
-          </div>
-          <div className={styles.inputLabelContainer}>
-            <input
-              required={true}
-              type="text"
-              value={phoneNumber}
-              onChange={handlePhoneNumberChange}
-              placeholder="Phone Number"
-            />
-            <label>Phone Number</label>
-          </div>
-          {showDriverInput ? (
-            <>
-              <div className={styles.inputLabelContainer}>
-                <input
-                  required={true}
-                  type="text"
-                  value={licenseNumber}
-                  onChange={handleLicenseNumberChange}
-                  placeholder="License Number"
-                />
-                <label>License Number</label>
-              </div>
-              <div className={styles.inputLabelContainer}>
-                <input
-                  required={true}
-                  type="text"
-                  value={vehcileMake}
-                  onChange={handleVehcileMakeChange}
-                  placeholder="Vehicle Make"
-                />
-                <label>Vehicle Make</label>
-              </div>
-              <div className={styles.inputLabelContainer}>
-                <input
-                  required={true}
-                  type="text"
-                  value={vehcileModel}
-                  onChange={handleVehcileModelChange}
-                  placeholder="Vehicle Model"
-                />
-                <label>Vehicle Model</label>
-              </div>
-              <div className={styles.inputLabelContainer}>
-                <input
-                  required={true}
-                  type="text"
-                  value={vehcileYear}
-                  onChange={handleVehcileyearChange}
-                  placeholder="Vehicle year"
-                />
-                <label>Vehicle year</label>
-              </div>
-              <div className={styles.inputLabelContainer}>
-                <input
-                  required={true}
-                  type="text"
-                  value={vehcilePlate}
-                  onChange={handleVehcilePlateNumberChange}
-                  placeholder="Vehicle Plate Number"
-                />
-                <label>Vehicle Plate Number</label>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
 
           <div className={styles.selector}>
             <select

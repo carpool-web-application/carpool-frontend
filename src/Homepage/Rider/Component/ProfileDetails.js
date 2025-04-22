@@ -62,11 +62,7 @@ const ProfileDetails = ({ profileData }) => {
           onChange={(e) => setRiderPhone(e.target.value)}
         />
       </div>
-      <SubmitButton
-        submitform={handleSave}
-        text="Save"
-        className={styles.submitButton}
-      />
+      <SubmitButton submitform={handleSave} text="Save" />
     </>
   );
 };
