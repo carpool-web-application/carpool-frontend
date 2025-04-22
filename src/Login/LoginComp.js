@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 import { useDispatch } from "react-redux";
 import { storeUser } from "../Slice/userSlice.js";
@@ -65,9 +65,6 @@ const Login = ({ setTimer }) => {
       })
     );
     setTimer();
-    /*     setExpiryTime(Date.now() + 3600000);
-    setIsAuthenticated(true);
-    setTimer(); */
     setTimeout(() => {
       if (existingRecordData.commuterType === "Rider") {
         navigate("/searchRide");
@@ -93,9 +90,6 @@ const Login = ({ setTimer }) => {
 
   return (
     <div className={styles.loginparentcontainer}>
-      <nav className={styles.navBar}>
-        <span>Carpool!!!</span>
-      </nav>
       <main className={styles.mainLogin}>
         {errorFlag ? (
           <ToastComponent visibility={errorFlag} message={error} />
@@ -104,7 +98,8 @@ const Login = ({ setTimer }) => {
         )}
         <div className={styles.formContainer}>
           <form className={styles.loginForm}>
-            <span>Login to enjoy offers while riding</span>
+            <h1 className={styles.headingText}>Welcome back!</h1>
+            <p className={styles.welcomeText}>Login to book your ride...</p>
             <div className={styles.inputContainer}>
               <input
                 key="username"
@@ -114,7 +109,7 @@ const Login = ({ setTimer }) => {
                 className={errorFlag ? styles.userNameError : styles.userName}
                 required={true}
               />
-              <label>Username</label>
+              <label className={styles.inputLabel}>Username</label>
             </div>
 
             <div className={styles.inputContainer}>
@@ -166,13 +161,15 @@ const Login = ({ setTimer }) => {
 
             <SubmitButton
               submitform={handleSubmit}
-              className={styles.submitButton}
+              buttonStyle={styles.submitButton}
               disabled={disable}
               text="Login"
             ></SubmitButton>
             <div>
               <span>Don't have an account?</span>
-              <a href="/createProfile">Sign up now</a>
+              <Link className={styles.linkText} to="/createProfile">
+                Sign Up
+              </Link>
             </div>
           </form>
         </div>

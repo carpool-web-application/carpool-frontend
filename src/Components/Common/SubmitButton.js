@@ -1,6 +1,6 @@
 import styles from "./submitButton.module.css";
 
-function SubmitButton({ submitform, disabled, text }) {
+function SubmitButton({ submitform, disabled, text, buttonStyle }) {
   const submitForm = (e) => {
     e.preventDefault();
     if (!disabled) {
@@ -12,9 +12,9 @@ function SubmitButton({ submitform, disabled, text }) {
     <button
       type="submit"
       onClick={submitForm}
-      name="Login"
-      value="LOG IN"
-      className={styles.submitButton}
+      name={text}
+      value={text}
+      className={buttonStyle}
       disabled={disabled}
     >
       {text}
