@@ -105,11 +105,12 @@ const Login = ({ setTimer }) => {
                 key="username"
                 type="text"
                 value={username}
+                placeholder="User Name"
                 onChange={handleUsernameChange}
                 className={errorFlag ? styles.userNameError : styles.userName}
                 required={true}
               />
-              <label className={styles.inputLabel}>Username</label>
+              {/* <label className={styles.inputLabel}>Username</label> */}
             </div>
 
             <div className={styles.inputContainer}>
@@ -117,11 +118,12 @@ const Login = ({ setTimer }) => {
                 key="password"
                 type={passwordType}
                 value={password}
+                placeholder="Password"
                 onChange={handlePasswordChange}
                 className={errorFlag ? styles.userNameError : styles.userName}
                 required={true}
               />
-              <label>Password</label>
+              {/* <label>Password</label> */}
               <div className={styles.iconContainer}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +168,7 @@ const Login = ({ setTimer }) => {
               text="Login"
             ></SubmitButton>
             <div>
-              <span>Don't have an account?</span>
+              <span>Don't have an account?</span>&nbsp;
               <Link className={styles.linkText} to="/createProfile">
                 Sign Up
               </Link>
