@@ -178,7 +178,7 @@ const RiderFinder = () => {
         <div className={styles.container}>
           <div className={styles.searchcontainerform}>
             <form className={styles.searchloginform}>
-              <Autocomplete>
+              <Autocomplete className="">
                 <input
                   id="origin"
                   type="text"
