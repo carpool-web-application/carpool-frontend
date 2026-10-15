@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import { Outlet } from "react-router-dom";
 import DriverNavBar from "../../Navbar/driver/navBarComponent-driver";
 import RiderNavbar from "../../Navbar/rider/navBarComponent-rider";
 import styles from "./Layout.module.css";

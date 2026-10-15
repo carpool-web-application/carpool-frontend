@@ -11,7 +11,6 @@ import styles from "./navBarComponent-rider.module.css";
 `; */
 
 const RiderNavBar = ({ riderData }) => {
-  const riderId = riderData?.userName;
   const dispatch = useDispatch();
 
   const handleLogoutButton = () => {

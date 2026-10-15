@@ -14,10 +14,11 @@ const RiderHome = () => {
   const driverData = useSelector((state) => state.user.userData);
   const driverId = driverData.userId;
   const [profileData, setProfileData] = useState([]);
-  const [rating, setRating] = useState(0);
+  const [error, setError] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [load, setLoad] = useState(true);
 
+  useEffect(() => {
   const defaultImageUrl =
     "https://as2.ftcdn.net/v2/jpg/00/65/77/27/1000_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg";
 
@@ -38,7 +39,7 @@ const RiderHome = () => {
   };
 
   const calculateAverageRating = (ratings) => {
-    if (ratings.length > 0) {
+    if (Array.isArray(ratings) && ratings.length > 0) {
       const sum = ratings.reduce((acc, rating) => acc + rating, 0);
       return sum / ratings.length;
     }
@@ -57,18 +58,17 @@ const RiderHome = () => {
       setImageUrl(imageUrl);
 
       const averageRating = calculateAverageRating(data.ratings);
-      setRating(averageRating);
+      setProfileData({ ...data, token: driverData.token, averageRating });
       console.log(data.ratings);
     } catch (error) {
-      console.error(error.message);
+      setError(error.message);
     } finally {
-      setLoad((prev) => !prev);
+      setLoad(false);
     }
   };
 
-  useEffect(() => {
     showProfileInformation();
-  }, []);
+  }, [driverId, driverData.token]);
 
   const handleImageUpload = async (data) => {
     const imageRef = ref(

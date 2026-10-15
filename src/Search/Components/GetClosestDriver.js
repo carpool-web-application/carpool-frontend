@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./GetClosestDriver.css";
-import PaymentComp from "../../Payment/payment";
 import { useNavigate } from "react-router-dom";
 import { findRider } from "../../Utils/ride";
 import { requestRide } from "../../Utils/rideRequest";
@@ -223,19 +222,18 @@ const GetClosestDriver = (props) => {
 
       {/*payment*/}
 
-      {paymentComp ? (
-        // <div className="payment">
-        //     { <a  href="/payment" onClick={showPopup}>
-        //      Confirm the seat! Let's complete the Payment....
-        //    </a> }
-        <div className="payment">
-          <PaymentComp />
-        </div>
-      ) : (
-        <p></p>
-      )}
-    </div>
-  );
+  return <div className="main_driver">
+    {error && <p role="alert">{error}</p>}
+    {loading ? <p role="status">Searching for drivers...</p> : closestDriver ? (
+      <div className="driver-det">
+        <h3>Driver Found!</h3>
+        <p>Driver: {closestDriver.driver?.userName || closestDriver.driver?.UserId}</p>
+        <p>Ride: {closestDriver.rideId}</p>
+        <p>Total Cost: ${((closestDriver.Cost / closestDriver.Availableseats) * Number(seats)).toFixed(2)}</p>
+        <button className="req" type="button" disabled={sending} onClick={sendRequest}>{sending ? "Sending..." : "REQUEST"}</button>
+      </div>
+    ) : !error && <p>No drivers match your route, seats, and pickup time. Please try another search.</p>}
+  </div>;
 };
 
 export default GetClosestDriver;

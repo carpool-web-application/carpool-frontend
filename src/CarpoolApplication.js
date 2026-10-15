@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import RideHistory from "./DriverRides/RideHistory.js";
 import { useDispatch, useSelector } from "react-redux";
-import { removeAuth, storeAuth } from "./Slice/authSlice.js";
+import { logout, isSessionValid } from "./Utils/session";
 import { ProtectedRoutes } from "./Utils/ProtectedRoutes.js";
 const Layout = React.lazy(() => import("./Components/Common/Layout.js"));
 const Search = React.lazy(() => import("./Search/search.js"));
@@ -18,7 +13,6 @@ const CreateProfile = React.lazy(() => import("./User/UserProfileCreation.js"));
 const DriverComp = React.lazy(() =>
   import("./PostCommute/DriverCreateRide.js")
 );
-const AboutPage = React.lazy(() => import("./AboutPage.js"));
 const Login = React.lazy(() => import("./Login/LoginComp.js"));
 const Home = React.lazy(() => import("./LandingPage/Home.js"));
 const DriverHome = React.lazy(() => import("./Homepage/Driver/DriverHome.js"));
@@ -33,52 +27,34 @@ const DriverPastRides = React.lazy(() =>
 const RiderPastRides = React.lazy(() => import("./MyTrips/riderPastRides.js"));
 const RiderHome = React.lazy(() => import("./Homepage/Rider/RiderHome.js"));
 
+const protectedPages = [
+  ["/createRide", "Driver", DriverComp], ["/searchRide", "Rider", Search],
+  ["/driverHome", "Driver", DriverHome], ["/pastRide", "Driver", RideHistory],
+  ["/riderHome", "Rider", RiderHome], ["/driverApproval", "Driver", DriverApproval],
+  ["/pastRides", "Driver", DriverPastRides], ["/riderpastRides", "Rider", RiderPastRides],
+];
 const CarpoolApplication = () => {
-  const firstTime = "";
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.authUser);
+  const { isAuthenticated, expiryTime } = useSelector((state) => state.authUser);
   const { userData } = useSelector((state) => state.user);
-  const handleExpiredSession = () => {
-    sessionStorage.removeItem("authTime");
-    localStorage.removeItem("auth");
-    dispatch(removeAuth());
-    return (
-      <>
-        <Home />
-      </>
-    );
-  };
-
-  const handleRelogin = (remainTime) => {
-    const timeoutDuration = sessionStorage.getItem("authTime") - Date.now();
-    if (timeoutDuration > 0) {
-      setTimeout(() => {
-        console.log("Session expired. Logging out.");
-        handleExpiredSession();
-      }, remainTime || 3600000);
-    } else {
-      console.log("Session already expired. Logging out immediately.");
-      handleExpiredSession();
-    }
-  };
-
   useEffect(() => {
-    const token = localStorage.getItem("auth");
-    const storedExpiryTime = sessionStorage.getItem("authTime");
-
-    if (token && storedExpiryTime) {
-      const currentTime = Date.now();
-      if (currentTime >= storedExpiryTime) {
-        handleExpiredSession();
-      } else {
-        dispatch(
-          storeAuth({ isAuthenticated: true, expiryTime: storedExpiryTime })
-        );
-        handleRelogin(storedExpiryTime - Date.now());
-      }
+    const auth = { isAuthenticated, expiryTime };
+    if (!isSessionValid(auth, userData)) {
+      if (isAuthenticated || userData || localStorage.getItem("auth")) dispatch(logout());
+      return;
     }
-  }, [firstTime]);
-  console.log(isAuthenticated);
+    const expire = () => {
+      if (!isSessionValid(auth, userData)) dispatch(logout());
+    };
+    const timer = setTimeout(expire, Math.max(0, Number(expiryTime) - Date.now()));
+    window.addEventListener("focus", expire);
+    window.addEventListener("storage", expire);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("focus", expire);
+      window.removeEventListener("storage", expire);
+    };
+  }, [dispatch, isAuthenticated, expiryTime, userData]);
   return (
     <>
       <Router>
@@ -303,5 +279,4 @@ const CarpoolApplication = () => {
     </>
   );
 };
-
 export default CarpoolApplication;

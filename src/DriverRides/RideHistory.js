@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import styles from "./rideHistory.module.css";
-import DriverNavBar from "../Navbar/driver/navBarComponent-driver.js";
-import { fetchRide, updateStatus } from "../Utils/ride";
+import { fetchRide } from "../Utils/ride";
 import PastRides from "./Component/PastRides.js";
 const RideHistory = () => {
   const [rideData, setRideData] = useState([]);
+  const [error, setError] = useState("");
   const driverData = useSelector((state) => state.user.userData);
 
   useEffect(() => {
@@ -37,5 +37,4 @@ const RideHistory = () => {
     </div>
   );
 };
-
 export default RideHistory;

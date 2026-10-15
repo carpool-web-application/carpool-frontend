@@ -4,7 +4,6 @@ function SubmitButton({ submitform, disabled, text, buttonStyle }) {
   const submitForm = (e) => {
     e.preventDefault();
     if (!disabled) {
-      console.log(e.key);
       submitform();
     }
   };
